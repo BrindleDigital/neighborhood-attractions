@@ -80,19 +80,45 @@ function na_register_attractions_metabox() {
 	) );
 	
 	$attractions_details->add_field( array(
-		'name' => esc_html__( 'Description', 'na' ),
-		'desc' => esc_html__( 'A short description of the attraction (optional)', 'na' ),
-		'id'   => 'na_attractions_description',
-		'type' => 'textarea_small',
-	) );
-
-	$attractions_details->add_field( array(
 		'name' => esc_html__( 'Website URL', 'na' ),
 		// 'desc' => esc_html__( 'field description (optional)', 'na' ),
 		'id'   => 'na_attractions_url',
 		'type' => 'text_url',
 		// 'protocols' => array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet'), // Array of allowed protocols
 		// 'repeatable' => true,
+	) );
+	
+	$attractions_details->add_field( array(
+		'name'    => 'Marker',
+		'desc'    => 'Upload an image or enter an URL.',
+		'id'      => 'na_attractions_marker',
+		'type'    => 'file',
+		// Optional:
+		'options' => array(
+			'url' => false, // Hide the text input for the url
+		),
+		'text'    => array(
+			'add_upload_file_text' => 'Add marker' // Change upload button text. Default: "Add or Upload File"
+		),
+		// query_args are passed to wp.media's library query.
+		'query_args' => array(
+			// 'type' => 'application/pdf', // Make library only display PDFs.
+			// Or only allow gif, jpg, or png images
+			'type' => array(
+			    // 'image/gif',
+			    'image/jpeg',
+			    'image/png',
+			    'image/svg',
+			),
+		),
+		'preview_size' => 'full', // Image size to use when previewing in the admin.
+	) );
+	
+	$attractions_details->add_field( array(
+		'name' => esc_html__( 'Description', 'na' ),
+		'desc' => esc_html__( 'A short description of the attraction (optional)', 'na' ),
+		'id'   => 'na_attractions_description',
+		'type' => 'textarea_small',
 	) );
 
 }
