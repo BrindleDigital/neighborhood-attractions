@@ -64,9 +64,9 @@ function na_register_attractions_metabox() {
 		// 'description' => esc_html__( 'Latitude', 'na' ),
 		'id'   => 'na_latitude',
 		'type' => 'text',
-		'attributes' => array(
-			'type' => 'number',
-		),
+		// 'attributes' => array(
+		// 	'type' => 'number',
+		// ),
 	) );
 	
 	$attractions_details->add_field( array(
@@ -74,9 +74,9 @@ function na_register_attractions_metabox() {
 		'description' => esc_html__( 'You can get this information from <a href="https://www.gps-coordinates.net/" target="_blank">here</a>', 'na' ),
 		'id'   => 'na_longitude',
 		'type' => 'text',
-		'attributes' => array(
-			'type' => 'number',
-		),
+		// 'attributes' => array(
+		// 	'type' => 'number',
+		// ),
 	) );
 	
 	$attractions_details->add_field( array(

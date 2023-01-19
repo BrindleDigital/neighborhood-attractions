@@ -28,7 +28,7 @@ define( 'NEIGHBORHOOD_ATTRACTIONS', dirname( __FILE__ ) );
 
 // Define the version of the plugin
 define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '0.1.1' );
-define( 'NEIGHBORHOOD_ATTRACTIONS_PATH', plugin_dir_path( __FILE__ ) );
+define( 'NEIGHBORHOOD_ATTRACTIONS_URL', plugin_dir_url( __FILE__ ) );
 define( 'NEIGHBORHOOD_ATTRACTIONS_DIR', dirname( __FILE__ ) );
 
 //* Initialize CMB2

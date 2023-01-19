@@ -5,7 +5,7 @@ return array (
   'title' => 'Attractions',
   'type' => 'attractions',
   'id' => '63c8b6d61b8f8',
-  'updated' => 1674103617,
+  'updated' => 1674155520,
   'columns' => 
   array (
     '63c8c50a7126e8' => 
@@ -143,6 +143,24 @@ return array (
       'filter' => 'off',
       'filter_label' => '',
       'name' => '63c8c4c46f9db4',
+    ),
+    '63c995eee45a1c' => 
+    array (
+      'type' => 'column-taxonomy',
+      'label' => 'Attraction types',
+      'width' => '',
+      'width_unit' => '%',
+      'taxonomy' => 'attractiontypes',
+      'term_link_to' => 'filter',
+      'number_of_items' => '10',
+      'separator' => 'comma',
+      'edit' => 'on',
+      'export' => 'on',
+      'sort' => 'on',
+      'search' => 'on',
+      'filter' => 'off',
+      'filter_label' => '',
+      'name' => '63c995eee45a1c',
     ),
     '63c8c5065fbe78' => 
     array (
