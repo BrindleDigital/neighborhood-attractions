@@ -10,7 +10,7 @@ use AC\ListScreenRepository\Rule;
 add_filter( 'acp/storage/repositories', function( array $repositories, ListScreenRepositoryFactory $factory ) {
     
     //! Change $writable to true to allow changes to columns for the content types below
-    $writable = false;
+    $writable = true;
     
     // 2. Add rules to target individual list tables.
     // Defaults to Rules::MATCH_ANY added here for clarity, other option is Rules::MATCH_ALL
@@ -19,7 +19,7 @@ add_filter( 'acp/storage/repositories', function( array $repositories, ListScree
     
     // 3. Register your repository to the stack
     $repositories['attractions'] = $factory->create(
-        ATTRACTIONS_DIR . '/acp-settings',
+        NEIGHBORHOOD_ATTRACTIONS_DIR . '/inc/acp-settings',
         $writable,
         $rules
     );

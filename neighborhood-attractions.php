@@ -33,6 +33,7 @@ define( 'NEIGHBORHOOD_ATTRACTIONS_DIR', dirname( __FILE__ ) );
 
 //* Initialize CMB2
 require_once NEIGHBORHOOD_ATTRACTIONS_DIR . '/vendor/cmb2/init.php';
+require_once NEIGHBORHOOD_ATTRACTIONS_DIR . '/vendor/cmb2-address-field/cmb2-address-field.php';
 
 //* Include everything in /lib
 foreach ( glob( NEIGHBORHOOD_ATTRACTIONS_DIR . "/inc/*.php", GLOB_NOSORT ) as $filename ){

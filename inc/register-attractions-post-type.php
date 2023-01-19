@@ -12,7 +12,7 @@ function na_register_cpt() {
 	$post_type = 'attractions';
 	$slug = 'attactions';
 	$icon = 'location'; //* https://developer.wordpress.org/resource/dashicons/
-	$supports = array( 'title', 'thumbnail', 'excerpt' );
+	$supports = array( 'title', 'thumbnail' );
 
 	$labels = array(
 		'name' => $name_plural,
