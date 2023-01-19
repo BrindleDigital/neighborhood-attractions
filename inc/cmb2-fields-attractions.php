@@ -111,7 +111,7 @@ function na_register_attractions_metabox() {
 			    'image/svg',
 			),
 		),
-		'preview_size' => 'full', // Image size to use when previewing in the admin.
+		'preview_size' => 'medium', // Image size to use when previewing in the admin.
 	) );
 	
 	$attractions_details->add_field( array(

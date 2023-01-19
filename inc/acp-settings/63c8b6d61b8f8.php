@@ -5,7 +5,7 @@ return array (
   'title' => 'Attractions',
   'type' => 'attractions',
   'id' => '63c8b6d61b8f8',
-  'updated' => 1674103010,
+  'updated' => 1674103617,
   'columns' => 
   array (
     '63c8c50a7126e8' => 
