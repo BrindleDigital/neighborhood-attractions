@@ -18,7 +18,6 @@
     GNU General Public License for more details.
 */
 
-
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
     die( "Sorry, you are not allowed to access this page directly." );
@@ -31,6 +30,9 @@ define( 'NEIGHBORHOOD_ATTRACTIONS', dirname( __FILE__ ) );
 define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '0.1' );
 define( 'NEIGHBORHOOD_ATTRACTIONS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'NEIGHBORHOOD_ATTRACTIONS_DIR', dirname( __FILE__ ) );
+
+//* Initialize CMB2
+require_once NEIGHBORHOOD_ATTRACTIONS_DIR . '/vendor/cmb2/init.php';
 
 //* Include everything in /lib
 foreach ( glob( NEIGHBORHOOD_ATTRACTIONS_DIR . "/inc/*.php", GLOB_NOSORT ) as $filename ){

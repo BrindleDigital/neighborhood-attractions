@@ -27,11 +27,11 @@ gulp.task('style-prod', function () {
 
 //* Watchers here
 gulp.task('watch', function () {
-    gulp.watch('css/**/*.scss', gulp.series(['style']));
+    gulp.watch('assets/css/**/*.scss', gulp.series(['style']));
 });
 
 gulp.task('prod', function () {
-    gulp.watch('css/**/*.scss', gulp.series(['style-prod']));
+    gulp.watch('assets/css/**/*.scss', gulp.series(['style-prod']));
 });
 
 gulp.task('default', gulp.series(['watch']));
