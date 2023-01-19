@@ -71,7 +71,7 @@ function na_register_attractions_metabox() {
 	
 	$attractions_details->add_field( array(
 		'name' => esc_html__( 'Longitude', 'na'),
-		// 'description' => esc_html__( 'Longitude', 'na' ),
+		'description' => esc_html__( 'You can get this information from <a href="https://www.gps-coordinates.net/" target="_blank">here</a>', 'na' ),
 		'id'   => 'na_longitude',
 		'type' => 'text',
 		'attributes' => array(
