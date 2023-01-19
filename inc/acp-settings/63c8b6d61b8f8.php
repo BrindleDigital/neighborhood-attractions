@@ -5,7 +5,7 @@ return array (
   'title' => 'Attractions',
   'type' => 'attractions',
   'id' => '63c8b6d61b8f8',
-  'updated' => 1674102050,
+  'updated' => 1674103010,
   'columns' => 
   array (
     '63c8c50a7126e8' => 
@@ -26,6 +26,30 @@ return array (
       'filter' => 'off',
       'filter_label' => '',
       'name' => '63c8c50a7126e8',
+    ),
+    '63c8c8717a5e34' => 
+    array (
+      'type' => 'column-meta',
+      'label' => 'Marker',
+      'width' => '130',
+      'width_unit' => 'px',
+      'field' => 'na_attractions_marker',
+      'field_type' => 'image',
+      'image_size' => 'cpac-custom',
+      'image_size_w' => '60',
+      'image_size_h' => '60',
+      'media_link_to' => '',
+      'number_of_items' => '10',
+      'before' => '',
+      'after' => '',
+      'edit' => 'on',
+      'export' => 'on',
+      'sort' => 'on',
+      'bulk_edit' => 'on',
+      'search' => 'on',
+      'filter' => 'off',
+      'filter_label' => '',
+      'name' => '63c8c8717a5e34',
     ),
     'title' => 
     array (

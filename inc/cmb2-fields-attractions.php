@@ -56,7 +56,7 @@ function na_register_attractions_metabox() {
 		'name' => esc_html__( 'Address', 'na' ),
 		// 'desc' => esc_html__( 'field description (optional)', 'na' ),
 		'id'   => 'na_attractions_address',
-		'type' => 'address',
+		'type' => 'text',
 	) );
 	
 	$attractions_details->add_field( array(
@@ -90,7 +90,7 @@ function na_register_attractions_metabox() {
 	
 	$attractions_details->add_field( array(
 		'name'    => 'Marker',
-		'desc'    => 'Upload an image or enter an URL.',
+		'desc'    => 'Upload a custom marker for this attraction. Suggested size: 36x36 pixels (but it will be rendered at full size)',
 		'id'      => 'na_attractions_marker',
 		'type'    => 'file',
 		// Optional:
