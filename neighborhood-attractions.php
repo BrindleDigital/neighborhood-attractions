@@ -3,7 +3,7 @@
 	Plugin Name: Neighborhood Attractions
 	Plugin URI: https://elod.in
     Description: Just another attractions map plugin
-	Version: 0.1
+	Version: 0.1.1
     Author: Jon Schroeder
     Author URI: https://elod.in
 
@@ -27,7 +27,7 @@ if ( !defined( 'ABSPATH' ) ) {
 define( 'NEIGHBORHOOD_ATTRACTIONS', dirname( __FILE__ ) );
 
 // Define the version of the plugin
-define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '0.1' );
+define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '0.1.1' );
 define( 'NEIGHBORHOOD_ATTRACTIONS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'NEIGHBORHOOD_ATTRACTIONS_DIR', dirname( __FILE__ ) );
 
