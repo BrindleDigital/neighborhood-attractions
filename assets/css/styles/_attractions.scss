@@ -1,0 +1,38 @@
+.na-attractions {
+    padding: 60px;
+    background-color: white;
+
+    @include mobile {
+        padding: 30px;
+    }
+}
+
+.na-attractions-wrap {
+    // max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 330px));
+    gap: 40px;
+    justify-content: center;
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+
+    .hentry {
+        h3 {
+            font-size: 22px;
+            margin: 0 0 0.3em;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 0 0 0.3em;
+            line-height: 1.4;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

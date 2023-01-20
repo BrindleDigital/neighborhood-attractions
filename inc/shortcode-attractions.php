@@ -1,9 +1,10 @@
 <?php
 
-
+// do the same thing whether the user puts [neighborhood] or [attractions]
 add_shortcode( 'attractions', 'na_attractions_render_shortcode' );
 add_shortcode( 'neighborhood', 'na_attractions_render_shortcode' );
 function na_attractions_render_shortcode( $atts ) {
+    
     ob_start();
     
     do_action( 'na_do_render_attractions_shortcode' );
@@ -17,7 +18,14 @@ add_action( 'na_do_render_attractions_shortcode', 'na_attractions_markup', 20 );
 
 function na_map_markup() {
     
-    echo '<p>Map here.</p>';
+    // the map itself
+    wp_enqueue_script( 'neighborhood-attractions-map' );
+    
+    $key = 'AIzaSyCWEDSYnjMWFSyqKNomN3DkGGneZ2kHrLM';
+    wp_enqueue_script( 'na-google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . $key . '&callback=initMap', array( 'neighborhood-attractions-map'), null, false );
+        
+    echo '<div class="na-attractions-map" id="na-attractions-map"></div>';
+    
 }
 
 function na_categories_markup() {
@@ -34,8 +42,8 @@ function na_categories_markup() {
     if ( $count < 2  )
         return;
         
-    echo '<div class="na-attractiontypes-wrap">';
-        echo '<ul class="na-attractiontypes">';
+    echo '<div class="na-attractions-categories">';
+        echo '<ul class="na-attractions-categories-wrap">';
             foreach ( $terms as $term ) {                        
                 printf( '<li><button class="attraction-type-button" data-slug="%s"><span class="attractiontype">%s</span></button></li>', $term->slug, $term->name );
             }
@@ -48,7 +56,7 @@ function na_attractions_markup() {
     // need this whether we're actually filtering or not, so it goes with the display
     wp_enqueue_script( 'neighborhood-attractions-filter-ajax' );
     
-    echo '<div class="na-attractions-wrap"></div>';
+    echo '<div class="na-attractions"><div class="na-attractions-wrap"></div></div>';
     
 }
 
@@ -95,8 +103,6 @@ function na_filter_attractions() {
         
     }
     
-    var_dump( $args ); 
-
     // The Query
     $custom_query = new WP_Query( $args );
 
@@ -106,8 +112,19 @@ function na_filter_attractions() {
         while ( $custom_query->have_posts() ) {
             
             $custom_query->the_post();
+            
+            $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
+            $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
+            $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
+            
+            $class = implode( ' ', get_post_class() );
+            
+            printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker );
 
-            do_action( 'na_do_attraction_each' );
+                do_action( 'na_do_attractions_each_map' );
+                do_action( 'na_do_attractions_each_list' );
+            
+            echo '</div>';
 
         }
         
@@ -119,25 +136,4 @@ function na_filter_attractions() {
     }
     
     wp_die();
-}
-
-add_action( 'na_do_attraction_each', 'na_attractions_each' );
-function na_attractions_each() {
-    
-    $title = get_the_title();
-    $na_attractions_address = get_post_meta( get_the_ID(), 'na_attractions_address', true );
-    $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
-    $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
-    $na_attractions_url = get_post_meta( get_the_ID(), 'na_attractions_url', true );
-    $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
-    
-    printf( '<div class="%s">', implode( ' ', get_post_class() ) );
-    
-        if ( $title )
-            printf( '<h3>%s</h3>', $title );
-            
-        if ( $na_attractions_address )
-            printf( '<p class="address">%s</p>', $na_attractions_address );
-    
-    echo '</div>';
 }

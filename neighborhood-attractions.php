@@ -39,6 +39,12 @@ require_once NEIGHBORHOOD_ATTRACTIONS_DIR . '/vendor/cmb2-address-field/cmb2-add
 foreach ( glob( NEIGHBORHOOD_ATTRACTIONS_DIR . "/inc/*.php", GLOB_NOSORT ) as $filename ){
     require_once $filename;
 }
+
+//* Include everything in /lib/*
+foreach ( glob( NEIGHBORHOOD_ATTRACTIONS_DIR . "/inc/*/*.php", GLOB_NOSORT ) as $filename ){
+    require_once $filename;
+}
+
 /////////////
 // Updater //
 /////////////

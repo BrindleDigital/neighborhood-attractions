@@ -1,0 +1,36 @@
+ul.na-attractions-categories-wrap {
+    margin: 0 auto;
+    display: flex;
+
+    @include mobile {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    button.attraction-type-button {
+        width: 100%;
+        text-align: center;
+        background-color: #f7f7f7;
+        color: black;
+        text-transform: uppercase;
+        font-size: 18px;
+        padding: 20px;
+
+        &.active {
+            background-color: white;
+            color: black;
+        }
+
+        @include mobile {
+            padding: 15px 15px;
+            font-size: 15px;
+        }
+    }
+}

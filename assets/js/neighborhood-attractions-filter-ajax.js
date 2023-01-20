@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
 
     // filter on load
     function filterAttractionsOnLoad() {
-        $('attraction-type-button').first().addClass('active');
+        $('.attraction-type-button').first().addClass('active');
 
         $.ajax({
             type: 'POST',
