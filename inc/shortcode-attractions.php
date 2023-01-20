@@ -108,6 +108,8 @@ function na_filter_attractions() {
 
     // The Loop
     if ( $custom_query->have_posts() ) {
+        
+        $count = 0;
 
         while ( $custom_query->have_posts() ) {
             
@@ -119,12 +121,14 @@ function na_filter_attractions() {
             
             $class = implode( ' ', get_post_class() );
             
-            printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker );
+            printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker, get_the_ID(), $count );
 
                 do_action( 'na_do_attractions_each_map' );
                 do_action( 'na_do_attractions_each_list' );
             
             echo '</div>';
+            
+            $count++;
 
         }
         

@@ -60,13 +60,14 @@ jQuery(document).ready(function ($) {
     }
 
     function addMarkers() {
+        markers = [];
         var bounds = new google.maps.LatLngBounds();
 
         for (let i = 0; i < locationsArray.length; i++) {
             var latitude = locationsArray[i][0];
             var longitude = locationsArray[i][1];
             var content = locationsArray[i][3];
-            var id = locationsArray[i][6];
+            var id = locationsArray[i][4];
             var label = title;
             var theposition = new google.maps.LatLng(latitude, longitude);
 
@@ -94,13 +95,7 @@ jQuery(document).ready(function ($) {
                 content:
                     '<div class="map-property-popup" id="overlay-' +
                     id +
-                    '"><a class="overlay" href="' +
-                    url +
-                    '"></a><a href="' +
-                    url +
-                    '" class="image"><img src="' +
-                    imageurl +
-                    '"/></a>' +
+                    '">' +
                     content +
                     '</div>',
             });
@@ -123,5 +118,16 @@ jQuery(document).ready(function ($) {
         addMarkers();
     }
 
+    function openMarkerOnClick() {
+        console.log(markers);
+
+        let markerID = $(this).attr('data-marker-id');
+
+        console.log(markerID);
+
+        google.maps.event.trigger(markers[markerID], 'click');
+    }
+
+    $(document).on('click mouseover', '.type-attractions', openMarkerOnClick);
     $(document).on('ajaxComplete load', resetMap);
 });

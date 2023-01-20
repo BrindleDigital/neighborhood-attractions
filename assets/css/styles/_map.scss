@@ -3,3 +3,18 @@
     height: 40vh;
     background-color: #e6e6e6;
 }
+
+.map-property-popup {
+    max-width: 300px;
+
+    h3 {
+        font-size: 20px;
+        margin-bottom: 0.3em;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.4;
+        margin: 0 0 0.3em;
+    }
+}
