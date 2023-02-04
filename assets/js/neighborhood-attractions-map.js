@@ -12,8 +12,10 @@ jQuery(document).ready(function ($) {
     // var markerImage = options.marker_url;
 
     // grab the styles from localization and convert the php array to json
-    // var mapStyle = options.json_style;
-    // mapsStyle = JSON.stringify(mapStyle);
+    var mapStyle = options.json_style;
+    // mapStyle = JSON.stringify(mapStyle);
+
+    console.log(mapStyle);
 
     function renderMap() {
         var myLatlng = new google.maps.LatLng(
@@ -26,7 +28,7 @@ jQuery(document).ready(function ($) {
             minZoom: 5,
             maxZoom: 14,
             center: myLatlng,
-            // styles: mapStyle,
+            styles: mapStyle,
             disableDefaultUI: false, // removes the satellite/map selection (might also remove other stuff)
             // scaleControl: true,
             zoomControl: true,
@@ -55,8 +57,6 @@ jQuery(document).ready(function ($) {
             id = $(this).attr('data-id');
             locationsArray.push([lat, long, title, content, id]);
         });
-
-        console.log(locationsArray);
     }
 
     function addMarkers() {

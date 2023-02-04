@@ -49,7 +49,7 @@ function render_section_google_maps() {
 function render_google_api_key() {
     $options = get_option( 'attractions_settings' );
     ?>
-    <input type="text" width="100%" name="attractions_settings[field_1]" value="<?php echo esc_attr( $options['field_1'] ); ?>">
+    <input type="text" width="100%" name="attractions_settings[google_api_key]" value="<?php echo esc_attr( $options['google_api_key'] ); ?>">
     <p class="description">At minimum, this must have access to the Maps javascript API.</p>
     <?php
 }

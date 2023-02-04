@@ -18,11 +18,20 @@ add_action( 'na_do_render_attractions_shortcode', 'na_attractions_markup', 20 );
 
 function na_map_markup() {
     
-    // the map itself
-    wp_enqueue_script( 'neighborhood-attractions-map' );
-        
     $options = get_option( 'attractions_settings' );
-    $key = esc_attr( $options['field_1'] );
+    $map_styles = $options['google_map_style'];
+        
+    // Localize the google maps script, then enqueue that
+    $maps_options = array(
+        'json_style' => json_decode( $map_styles ),
+        // 'marker_url' => get_field( 'google_map_marker', 'option' ),
+    );
+    
+    // Localize and load the map itself
+    wp_localize_script( 'neighborhood-attractions-map', 'options', $maps_options );
+    wp_enqueue_script( 'neighborhood-attractions-map');
+            
+    $key = esc_attr( $options['google_api_key'] );
     wp_enqueue_script( 'na-google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . $key . '&callback=initMap', array( 'neighborhood-attractions-map'), null, false );
         
     echo '<div class="na-attractions-map" id="na-attractions-map"></div>';

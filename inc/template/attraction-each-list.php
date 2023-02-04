@@ -12,16 +12,24 @@ function na_attractions_each_list() {
     $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
     $na_attractions_url = get_post_meta( get_the_ID(), 'na_attractions_url', true );
     $na_attractions_description = get_post_meta( get_the_ID(), 'na_attractions_description', true );
+    $background = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+	
+    if ( $background ) 
+        printf( '<div class="featured" style="background-image:url( %s )"></div>', $background );
+        
+    echo '<div class="attractions-content">';
     
-    if ( $title )
-        printf( '<h3>%s</h3>', $title );
-        
-    if ( $na_attractions_address )
-        printf( '<p class="address">%s</p>', $na_attractions_address );
-        
-    if ( $na_attractions_description )
-        printf( '<p class="description">%s</p>', $na_attractions_description );
-        
-    edit_post_link( 'Edit attraction', '<small>', '</small>' );
+        if ( $title )
+            printf( '<h3>%s</h3>', $title );
+            
+        if ( $na_attractions_address )
+            printf( '<p class="address">%s</p>', $na_attractions_address );
+            
+        if ( $na_attractions_description )
+            printf( '<p class="description">%s</p>', $na_attractions_description );
+            
+        edit_post_link( 'Edit attraction', '<small>', '</small>' );
+    
+    echo '</div>';
     
 }
