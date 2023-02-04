@@ -20,8 +20,9 @@ function na_map_markup() {
     
     // the map itself
     wp_enqueue_script( 'neighborhood-attractions-map' );
-    
-    $key = 'AIzaSyCWEDSYnjMWFSyqKNomN3DkGGneZ2kHrLM';
+        
+    $options = get_option( 'attractions_settings' );
+    $key = esc_attr( $options['field_1'] );
     wp_enqueue_script( 'na-google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . $key . '&callback=initMap', array( 'neighborhood-attractions-map'), null, false );
         
     echo '<div class="na-attractions-map" id="na-attractions-map"></div>';
