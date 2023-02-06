@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
     var mapStyle = options.json_style;
     // mapStyle = JSON.stringify(mapStyle);
 
-    console.log(mapStyle);
+    // console.log(mapStyle);
 
     function renderMap() {
         var myLatlng = new google.maps.LatLng(
@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
         var mapOptions = {
             zoom: 8,
             minZoom: 5,
-            maxZoom: 14,
+            maxZoom: 15,
             center: myLatlng,
             styles: mapStyle,
             disableDefaultUI: false, // removes the satellite/map selection (might also remove other stuff)
@@ -55,7 +55,8 @@ jQuery(document).ready(function ($) {
             title = $(this).find('h3').text();
             content = $(this).find('.map-markup').html();
             id = $(this).attr('data-id');
-            locationsArray.push([lat, long, title, content, id]);
+            markerImage = $(this).attr('data-marker');
+            locationsArray.push([lat, long, title, content, id, markerImage]);
         });
     }
 
@@ -68,6 +69,7 @@ jQuery(document).ready(function ($) {
             var longitude = locationsArray[i][1];
             var content = locationsArray[i][3];
             var id = locationsArray[i][4];
+            var markerImage = locationsArray[i][5];
             var label = title;
             var theposition = new google.maps.LatLng(latitude, longitude);
 
@@ -119,11 +121,11 @@ jQuery(document).ready(function ($) {
     }
 
     function openMarkerOnClick() {
-        console.log(markers);
+        // console.log(markers);
 
         let markerID = $(this).attr('data-marker-id');
 
-        console.log(markerID);
+        // console.log(markerID);
 
         google.maps.event.trigger(markers[markerID], 'click');
     }

@@ -108,7 +108,7 @@ function na_register_attractions_metabox() {
 			    // 'image/gif',
 			    'image/jpeg',
 			    'image/png',
-			    'image/svg',
+			    'image/svg+xml',
 			),
 		),
 		'preview_size' => 'medium', // Image size to use when previewing in the admin.
@@ -119,6 +119,13 @@ function na_register_attractions_metabox() {
 		'desc' => esc_html__( 'A short description of the attraction (optional)', 'na' ),
 		'id'   => 'na_attractions_description',
 		'type' => 'textarea_small',
+	) );
+	
+	$attractions_details->add_field( array(
+		'name' => esc_html__( 'Always show this attraction', 'na' ),
+		'desc' => esc_html__( 'Check this box if you\'d like this location to always show on the map (is this location in essence one of the center points of the map?)', 'na' ),
+		'id'   => 'na_attractions_always_show',
+		'type' => 'checkbox',
 	) );
 
 }

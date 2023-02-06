@@ -12,4 +12,4 @@ function na_acp_editing_change_date_format_for_marker( $value, AC\Column $column
 	return $value;
 }
 
-add_filter( 'acp/editing/save_value', 'na_acp_editing_change_date_format_for_marker', 10, 2 );
+// add_filter( 'acp/editing/save_value', 'na_acp_editing_change_date_format_for_marker', 10, 2 );
