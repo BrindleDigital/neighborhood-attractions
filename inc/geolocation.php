@@ -64,8 +64,8 @@ function na_geocoding_get_lat_long( $post_id ) {
     if ( !$na_attractions_address )
         return;
         
-    var_dump( $na_latitude );
-    var_dump( $na_longitude );
+    // var_dump( $na_latitude );
+    // var_dump( $na_longitude );
             
     // bail if we already have a lat or long (we only geocode if we need it)
     if ( $na_latitude || $na_longitude )

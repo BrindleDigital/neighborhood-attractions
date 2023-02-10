@@ -31,7 +31,7 @@ function na_attractions_each_map() {
                 printf( '<p class="description">%s</p>', $na_attractions_description );
                 
             if ( $na_attractions_url )
-                printf( '<p class="url"><a href="%s" target="_blank">View online</p>', $na_attractions_url );
+                printf( '<p class="url"><a href="%s" target="_blank">View online</a></p>', $na_attractions_url );
                 
             edit_post_link( 'Edit attraction', '<small>', '</small>' );
         

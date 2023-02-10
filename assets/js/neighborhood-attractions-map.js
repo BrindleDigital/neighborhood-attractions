@@ -130,6 +130,6 @@ jQuery(document).ready(function ($) {
         google.maps.event.trigger(markers[markerID], 'click');
     }
 
-    $(document).on('click mouseover', '.type-attractions', openMarkerOnClick);
+    $(document).on('click', '.type-attractions', openMarkerOnClick);
     $(document).on('ajaxComplete load', resetMap);
 });

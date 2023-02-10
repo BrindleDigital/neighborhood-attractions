@@ -149,5 +149,52 @@ function na_filter_attractions() {
         echo '<p>None found!</p>';
     }
     
+    $always_show_args = array(
+        'post_type' => 'attractions',
+        'posts_per_page' => '-1',
+        'meta_query' => array(
+            array(
+                'key' => 'na_attractions_always_show',
+                'value' => 'on',
+            )
+        )
+    );
+    
+    // The Query
+    $always_show_attractions = new WP_Query( $always_show_args );
+    
+    // The Loop
+    if ( $always_show_attractions->have_posts() ) {
+        
+        $count = 0;
+
+        while ( $always_show_attractions->have_posts() ) {
+            
+            $always_show_attractions->the_post();
+            
+            $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
+            $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
+            $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
+            
+            $class = implode( ' ', get_post_class() );
+            
+            printf( '<div style="display: none;" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker, get_the_ID(), $count );
+
+                do_action( 'na_do_attractions_each_map' );
+                do_action( 'na_do_attractions_each_list' );
+            
+            echo '</div>';
+            
+            $count++;
+
+        }
+        
+        // Restore postdata
+        wp_reset_postdata();
+
+    } else {
+        echo '<p>None found!</p>';
+    }
+    
     wp_die();
 }
