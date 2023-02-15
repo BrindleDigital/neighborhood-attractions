@@ -1,6 +1,12 @@
+### 0.2.2
+
+-   Adding two-way click functionality to the map
+
 ### 0.2.1
 
 -   Adding featured image capabilities
+-   Fixing an error when no options were set
+-   Removing "none found" message as there's no situation where it's desirable to display
 
 ### 0.2
 

@@ -7,6 +7,10 @@ add_action( 'init', 'na_geocode' );
 function na_geocode() {
     
     $options = get_option( 'attractions_settings' );
+    
+    if ( !$options )
+        return;
+        
     $positionstack_api_key = $options['positionstack_api_key'];
             
     // bail if we don't have an API key, because then we won't be able to geocode anyway
@@ -38,7 +42,7 @@ function na_geocode() {
         return;
                 
     foreach( $posts as $post_id ) {
-        console_log( $post_id );
+        // console_log( $post_id );
         
         do_action( 'na_geocoding_do_get_lat_long', $post_id );        
     }

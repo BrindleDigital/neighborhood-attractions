@@ -95,6 +95,18 @@ function na_filter_attractions() {
     $args = array(
         'post_type' => 'attractions',
         'posts_per_page' => '-1',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'na_latitude',
+                'compare' => 'EXISTS',
+            ),
+            array(
+                'key' => 'na_longitude',
+                'compare' => 'EXISTS',
+            ),
+        ),
+        
     );
     
     if ( $attraction_type_slug ) {
@@ -106,7 +118,7 @@ function na_filter_attractions() {
                     'field'    => 'slug',
                     'terms'    => $attraction_type_slug,
                 ),
-            ),  
+            ),
         );
         
         $args = array_merge( $args, $tax_args );
@@ -146,7 +158,7 @@ function na_filter_attractions() {
         wp_reset_postdata();
 
     } else {
-        echo '<p>None found!</p>';
+        // echo '<p>None found!</p>';
     }
     
     $always_show_args = array(
@@ -193,7 +205,7 @@ function na_filter_attractions() {
         wp_reset_postdata();
 
     } else {
-        echo '<p>None found!</p>';
+        // echo '<p>None found!</p>';
     }
     
     wp_die();

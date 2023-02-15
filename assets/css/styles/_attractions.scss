@@ -28,7 +28,8 @@
 
         &:hover,
         &:focus,
-        &:active {
+        &:active,
+        &.active {
             background-color: rgba(black, 0.04);
         }
 

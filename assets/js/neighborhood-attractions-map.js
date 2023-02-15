@@ -100,6 +100,7 @@ jQuery(document).ready(function ($) {
                     '">' +
                     content +
                     '</div>',
+                theMarkerID: id,
             });
 
             google.maps.event.addListener(marker, 'click', function () {
@@ -108,6 +109,12 @@ jQuery(document).ready(function ($) {
                 }
 
                 this['infowindow'].open(map, this);
+
+                var markerID = this.infowindow.theMarkerID;
+                $('.type-attractions').removeClass('active');
+                $('.type-attractions[data-id=' + markerID + ']').addClass(
+                    'active'
+                );
             });
 
             markers.push(marker);
@@ -120,7 +127,7 @@ jQuery(document).ready(function ($) {
         addMarkers();
     }
 
-    function openMarkerOnClick() {
+    function openMarkerOnGridClick() {
         // console.log(markers);
 
         let markerID = $(this).attr('data-marker-id');
@@ -130,6 +137,12 @@ jQuery(document).ready(function ($) {
         google.maps.event.trigger(markers[markerID], 'click');
     }
 
-    $(document).on('click', '.type-attractions', openMarkerOnClick);
+    function activeOnClick() {
+        $('.type-attractions').removeClass('active');
+        $(this).addClass('active');
+    }
+
+    $(document).on('click', '.type-attractions', openMarkerOnGridClick);
+    $(document).on('click', '.type-attractions', activeOnClick);
     $(document).on('ajaxComplete load', resetMap);
 });
