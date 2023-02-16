@@ -1,3 +1,7 @@
+### 0.2.3
+
+-   Adding directions link on map
+
 ### 0.2.2
 
 -   Adding two-way click functionality to the map
