@@ -1,6 +1,7 @@
 ### 0.2.3
 
 -   Adding directions link on map
+-   Fixing an errant </a>
 
 ### 0.2.2
 
