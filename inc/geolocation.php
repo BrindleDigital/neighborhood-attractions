@@ -16,37 +16,74 @@ function na_geocode() {
     // bail if we don't have an API key, because then we won't be able to geocode anyway
     if ( !$positionstack_api_key )
         return;
+        
+    na_do_empty_lat_long_posts();
+    na_do_not_exists_lat_long_posts();
+    
+}
+
+function na_do_empty_lat_long_posts() {
     
     $args = array(
         'post_type' => 'attractions',
         'posts_per_page' => '-1',
         'fields' => 'ids',
         'meta_query' => array(
-            'relation' => 'AND',
+            'relation' => 'OR',
             array(
                 'key' => 'na_latitude',
-                'compare' => 'NOT EXISTS'
+                'value'   => array(''),
+                'compare' => 'IN'
             ),
             array(
                 'key' => 'na_longitude',
-                'compare' => 'NOT EXISTS'
+                'value'   => array(''),
+                'compare' => 'IN'
             ),
         ),
     );
     
     $posts = get_posts( $args );
-
     
     // bail if we don't have anything needing geocoded
     if ( !$posts )
         return;
                 
     foreach( $posts as $post_id ) {
-        // console_log( $post_id );
         
         do_action( 'na_geocoding_do_get_lat_long', $post_id );        
     }
+}
+
+function na_do_not_exists_lat_long_posts() {
     
+    $args = array(
+        'post_type' => 'attractions',
+        'posts_per_page' => '-1',
+        'fields' => 'ids',
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => 'na_latitude',
+                'compare' => 'NOT EXISTS',
+            ),
+            array(
+                'key' => 'na_longitude',
+                'compare' => 'NOT EXISTS',
+            ),
+        ),
+    );
+    
+    $posts = get_posts( $args );
+    
+    // bail if we don't have anything needing geocoded
+    if ( !$posts )
+        return;
+                
+    foreach( $posts as $post_id ) {
+        
+        do_action( 'na_geocoding_do_get_lat_long', $post_id );        
+    }
 }
 
 add_action( 'na_geocoding_do_get_lat_long', 'na_geocoding_get_lat_long', 10, 1 );
@@ -59,11 +96,11 @@ function na_geocoding_get_lat_long( $post_id ) {
     $na_attractions_address = get_post_meta( $post_id, 'na_attractions_address', true );
     $na_latitude = get_post_meta( $post_id, 'na_latitude', true );
     $na_longitude = get_post_meta( $post_id, 'na_longitude', true );
-                    
+    
     // bail if there's no maps api key set
     if ( !$positionstack_api_key )
         return;
-           
+                   
     // bail if there's no address set to geocode
     if ( !$na_attractions_address )
         return;
@@ -100,6 +137,7 @@ function na_geocoding_get_lat_long( $post_id ) {
     
     $response_php_object = json_decode( $response );
     $data = $response_php_object->data;
+    
     
     $lat = esc_html( $data[0]->latitude );
     $long = esc_html( $data[0]->longitude);

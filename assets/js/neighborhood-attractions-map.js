@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
         var mapOptions = {
             zoom: 8,
             minZoom: 5,
-            maxZoom: 15,
+            maxZoom: 17,
             center: myLatlng,
             styles: mapStyle,
             disableDefaultUI: false, // removes the satellite/map selection (might also remove other stuff)

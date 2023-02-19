@@ -3,7 +3,7 @@
 	Plugin Name: Neighborhood Attractions
 	Plugin URI: https://elod.in
     Description: Just another attractions map plugin
-	Version: 0.2.4
+	Version: 1.0
     Author: Jon Schroeder
     Author URI: https://elod.in
 
@@ -23,17 +23,12 @@ if ( !defined( 'ABSPATH' ) ) {
     die( "Sorry, you are not allowed to access this page directly." );
 }
 
-// Plugin directory
-define( 'NEIGHBORHOOD_ATTRACTIONS', dirname( __FILE__ ) );
-
 // Define the version of the plugin
-define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '0.2.4' );
+define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '1.0' );
+
+// Plugin directory
 define( 'NEIGHBORHOOD_ATTRACTIONS_URL', plugin_dir_url( __FILE__ ) );
 define( 'NEIGHBORHOOD_ATTRACTIONS_DIR', dirname( __FILE__ ) );
-
-//* Initialize CMB2
-require_once NEIGHBORHOOD_ATTRACTIONS_DIR . '/vendor/cmb2/init.php';
-require_once NEIGHBORHOOD_ATTRACTIONS_DIR . '/vendor/cmb2-address-field/cmb2-address-field.php';
 
 //* Include everything in /lib
 foreach ( glob( NEIGHBORHOOD_ATTRACTIONS_DIR . "/inc/*.php", GLOB_NOSORT ) as $filename ){

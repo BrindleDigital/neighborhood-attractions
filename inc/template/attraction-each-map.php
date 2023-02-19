@@ -30,10 +30,14 @@ function na_attractions_each_map() {
             if ( $na_attractions_description )
                 printf( '<p class="description">%s</p>', $na_attractions_description );
                 
-            if ( $na_attractions_url )
-                printf( '<p class="url"><a href="%s" target="_blank">View online</a></p>', $na_attractions_url );
+            echo '<p class="buttons">';
                 
-            printf( '<p class="directions"><a target="_blank" href="https://www.google.com/maps?q=%s%20%s">Get directions</a></p>', $title, $na_attractions_address );
+                if ( $na_attractions_url )
+                    printf( '<a class="url" href="%s" target="_blank">View online</a>', $na_attractions_url );
+                    
+                printf( '<a class="directions" target="_blank" href="https://www.google.com/maps?q=%s %s">Get directions</a>', $title, $na_attractions_address );
+            
+            echo '</p>';
                 
             edit_post_link( 'Edit attraction', '<small>', '</small>' );
         

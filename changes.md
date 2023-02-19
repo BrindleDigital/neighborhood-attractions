@@ -1,3 +1,14 @@
+### 1.0
+
+-   Removing CMB2 and going full custom on the custom fields (deleting all CMB2 files)
+-   Adding more detection for when a post needs to geolocate
+-   Adding custom field for Media uploads
+-   Admin Columns Pro compatibility with bool and media fields
+-   Adding logic to avoid pulling in the "always show" attractions twice
+-   Testing and minor bugfixes on the category view
+-   Button wrapper on the directions and url links
+-   Adding columns for non-ACP users
+
 ### 0.2.4
 
 -   Fixing an errant </a>

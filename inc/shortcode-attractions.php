@@ -99,14 +99,19 @@ function na_filter_attractions() {
             'relation' => 'AND',
             array(
                 'key' => 'na_latitude',
-                'compare' => 'EXISTS',
+                'compare' => '!=',
+                'value' => array(''),
             ),
             array(
                 'key' => 'na_longitude',
-                'compare' => 'EXISTS',
+                'compare' => '!=',
+                'value' => array(''),
             ),
+            array(
+                'key' => 'na_attractions_always_show',
+                'compare' => 'NOT EXISTS',
+            )
         ),
-        
     );
     
     if ( $attraction_type_slug ) {
@@ -137,10 +142,10 @@ function na_filter_attractions() {
             
             $custom_query->the_post();
             
-            $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
-            $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
-            $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
-            
+            $na_latitude = esc_attr( get_post_meta( get_the_ID(), 'na_latitude', true ) );
+            $na_longitude = esc_attr( get_post_meta( get_the_ID(), 'na_longitude', true ) );
+            $na_attractions_marker = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker', true ), 'full' );
+                        
             $class = implode( ' ', get_post_class() );
             
             printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker, get_the_ID(), $count );
@@ -167,10 +172,12 @@ function na_filter_attractions() {
         'meta_query' => array(
             array(
                 'key' => 'na_attractions_always_show',
-                'value' => 'on',
+                'value' => true,
             )
         )
     );
+    
+    
     
     // The Query
     $always_show_attractions = new WP_Query( $always_show_args );
@@ -182,12 +189,15 @@ function na_filter_attractions() {
 
         while ( $always_show_attractions->have_posts() ) {
             
+            $na_always_show = get_post_meta( get_the_ID(), 'na_always_show', true );
+            console_log( $na_always_show );
+            
             $always_show_attractions->the_post();
             
             $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
             $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
-            $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
-            
+            $na_attractions_marker = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker', true ), 'full' );
+                        
             $class = implode( ' ', get_post_class() );
             
             printf( '<div style="display: none;" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker, get_the_ID(), $count );

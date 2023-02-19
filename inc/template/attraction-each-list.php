@@ -28,8 +28,12 @@ function na_attractions_each_list() {
         if ( $na_attractions_description )
             printf( '<p class="description">%s</p>', $na_attractions_description );
             
-        if ( $na_attractions_url )
-            printf( '<p class="url"><a href="%s" target="_blank">View online</a></p>', $na_attractions_url );
+        echo '<p class="buttons">';
+                
+            if ( $na_attractions_url )
+                printf( '<a class="url" href="%s" target="_blank">View online</a>', $na_attractions_url );                    
+            
+        echo '</p>';
             
         edit_post_link( 'Edit attraction', '<small>', '</small>' );
     
