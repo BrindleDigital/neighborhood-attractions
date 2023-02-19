@@ -1,3 +1,7 @@
+### 1.0.1
+
+-   Change the Geocoding link to a better one
+
 ### 1.0
 
 -   Removing CMB2 and going full custom on the custom fields (deleting all CMB2 files)

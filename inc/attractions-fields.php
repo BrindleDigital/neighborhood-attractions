@@ -141,7 +141,7 @@ function na_attractions_details_metabox_callback( $post ) {
             </div>
             <div class="column">                
                 <input type="number" step="0.00000000001" id="na_latitude" name="na_latitude" value="<?php echo esc_attr( $na_latitude ); ?>">
-                <p class="description">You can get this information from <a href="https://www.gps-coordinates.net/" target="_blank">here</a>, or add Positionstack API information (free) in the <a href="/wp-admin/edit.php?post_type=attractions&page=attractions-settings">plugin settings.</a></p>
+                <p class="description">You can get this information from <a href="https://www.latlong.net/convert-address-to-lat-long.html" target="_blank">here</a>, or add Positionstack API information (free) in the <a href="/wp-admin/edit.php?post_type=attractions&page=attractions-settings">plugin settings.</a></p>
             </div>
         </div>
         
