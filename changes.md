@@ -1,3 +1,8 @@
+## 1.0.2
+
+-   Move the repo to Brindle
+-   Change the update location in the plugin to the new one
+
 ### 1.0.1
 
 -   Change the Geocoding link to a better one

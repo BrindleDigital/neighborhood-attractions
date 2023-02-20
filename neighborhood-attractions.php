@@ -1,11 +1,11 @@
 <?php
 /*
 	Plugin Name: Neighborhood Attractions
-	Plugin URI: https://elod.in
+	Plugin URI: https://github.com/BrindleDigital/neighborhood-attractions
     Description: Just another attractions map plugin
-	Version: 1.0
-    Author: Jon Schroeder
-    Author URI: https://elod.in
+	Version: 1.0.2
+    Author: Brindle Digital
+    Author URI: https://brindledigital.com
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 // Define the version of the plugin
-define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '1.0' );
+define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '1.0.2' );
 
 // Plugin directory
 define( 'NEIGHBORHOOD_ATTRACTIONS_URL', plugin_dir_url( __FILE__ ) );
@@ -55,7 +55,7 @@ if ( !function_exists( 'console_log' ) ) {
 
 require 'vendor/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/jonschr/neighborhood-attractions',
+	'https://github.com/BrindleDigital/neighborhood-attractions',
 	__FILE__,
 	'neighborhood-attractions'
 );
