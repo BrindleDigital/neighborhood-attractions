@@ -40,7 +40,7 @@ foreach ( glob( NEIGHBORHOOD_ATTRACTIONS_DIR . "/inc/*/*.php", GLOB_NOSORT ) as 
     require_once $filename;
 }
 
-// used for debugging
+//* Used for debugging
 if ( !function_exists( 'console_log' ) ) {
 	function console_log( $data ){
 		echo '<script>';
@@ -49,10 +49,7 @@ if ( !function_exists( 'console_log' ) ) {
 	}
 }
 
-/////////////
-// Updater //
-/////////////
-
+//* Plugin Update Checker
 require 'vendor/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/BrindleDigital/neighborhood-attractions',
