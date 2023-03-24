@@ -1,3 +1,7 @@
+## 1.0.3
+
+-   Add the checkboxes back in
+
 ## 1.0.2
 
 -   Move the repo to Brindle

@@ -6,10 +6,13 @@ function na_register_tax() {
 		'attractiontypes',
 		'attractions',
 		array(
-			'label' => __( 'Attraction Types' ),
-			'rewrite' => array( 'slug' => 'attractiontypes' ),
-			'hierarchical' => true,
-			'show_admin_column' => true,
+			'label' 					=> __( 'Attraction Types' ),
+			'rewrite' 					=> array( 'slug' => 'attractiontypes' ),
+			'hierarchical' 				=> true,
+			'show_admin_column' 		=> true,
+			'public'                    => true,
+			'show_ui'                   => true,
+			'show_admin_column'         => true,
 		)
 	);
 }

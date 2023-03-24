@@ -4,6 +4,7 @@ add_filter( 'manage_attractions_posts_columns', 'na_default_admin_columns' );
 function na_default_admin_columns( $columns ) {
     
     $columns = array(
+        'cb' => '<input type="checkbox" />',
         'image' => __( 'Image' ),
         'na_attractions_marker_id' => __( 'Marker' ),
         'title' => __( 'Title', 'na' ),
