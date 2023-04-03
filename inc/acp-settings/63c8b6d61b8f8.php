@@ -1,11 +1,11 @@
 <?php
 
 return array (
-  'version' => '6.0.3',
+  'version' => '6.1.3',
   'title' => 'Attractions',
   'type' => 'attractions',
   'id' => '63c8b6d61b8f8',
-  'updated' => 1676772317,
+  'updated' => 1680559001,
   'columns' => 
   array (
     '63c8c50a7126e8' => 
@@ -33,11 +33,11 @@ return array (
       'label' => 'Marker',
       'width' => '46',
       'width_unit' => 'px',
-      'field' => 'na_attractions_marker',
+      'field' => 'na_attractions_marker_id',
       'field_type' => 'image',
       'image_size' => 'cpac-custom',
       'image_size_w' => '36',
-      'image_size_h' => '',
+      'image_size_h' => '60',
       'media_link_to' => '',
       'number_of_items' => '10',
       'before' => '',
@@ -222,25 +222,32 @@ return array (
   ),
   'settings' => 
   array (
+    'roles' => 
+    array (
+    ),
+    'users' => 
+    array (
+    ),
+    'sorting' => '0',
+    'sorting_order' => 'asc',
     'hide_inline_edit' => 'off',
     'hide_bulk_edit' => 'off',
     'hide_bulk_delete' => 'off',
-    'hide_filters' => 'on',
-    'hide_filter_post_date' => 'on',
     'hide_smart_filters' => 'off',
     'hide_segments' => 'off',
     'hide_export' => 'off',
     'hide_conditional_formatting' => 'off',
     'hide_new_inline' => 'off',
+    'resize_columns' => 'off',
+    'column_order' => 'off',
+    'hide_filters' => 'on',
+    'hide_filter_post_date' => 'on',
     'hide_submenu' => 'off',
     'hide_search' => 'off',
     'hide_bulk_actions' => 'off',
-    'resize_columns' => 'off',
-    'column_order' => 'off',
     'hide_row_actions' => 'off',
     'horizontal_scrolling' => 'on',
-    'sorting' => '0',
-    'sorting_order' => 'asc',
     'primary_column' => '',
+    'filter_segment' => '',
   ),
 );

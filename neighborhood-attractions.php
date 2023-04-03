@@ -3,7 +3,7 @@
 	Plugin Name: Neighborhood Attractions
 	Plugin URI: https://github.com/BrindleDigital/neighborhood-attractions
     Description: Just another attractions map plugin
-	Version: 1.0.3
+	Version: 1.0.4
     Author: Brindle Digital
     Author URI: https://brindledigital.com
 
@@ -25,7 +25,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 // Define the version of the plugin
-define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '1.0.3' );
+define( 'NEIGHBORHOOD_ATTRACTIONS_VERSION', '1.0.4' );
 
 // Plugin directory
 define( 'NEIGHBORHOOD_ATTRACTIONS_URL', plugin_dir_url( __FILE__ ) );
@@ -60,4 +60,3 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 
 // Optional: Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
-

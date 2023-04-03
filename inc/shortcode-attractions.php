@@ -144,11 +144,11 @@ function na_filter_attractions() {
             
             $na_latitude = esc_attr( get_post_meta( get_the_ID(), 'na_latitude', true ) );
             $na_longitude = esc_attr( get_post_meta( get_the_ID(), 'na_longitude', true ) );
-            $na_attractions_marker = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker', true ), 'full' );
+            $na_attractions_marker_id = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker_id', true ), 'full' );
                         
             $class = implode( ' ', get_post_class() );
             
-            printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker, get_the_ID(), $count );
+            printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker_id, get_the_ID(), $count );
 
                 do_action( 'na_do_attractions_each_map' );
                 do_action( 'na_do_attractions_each_list' );
@@ -196,11 +196,11 @@ function na_filter_attractions() {
             
             $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
             $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
-            $na_attractions_marker = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker', true ), 'full' );
+            $na_attractions_marker_id = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker_id', true ), 'full' );
                         
             $class = implode( ' ', get_post_class() );
             
-            printf( '<div style="display: none;" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker, get_the_ID(), $count );
+            printf( '<div style="display: none;" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', $class, $na_latitude, $na_longitude, $na_attractions_marker_id, get_the_ID(), $count );
 
                 do_action( 'na_do_attractions_each_map' );
                 do_action( 'na_do_attractions_each_list' );
