@@ -7,7 +7,7 @@ function na_attractions_each_map() {
     $na_attractions_address = get_post_meta( get_the_ID(), 'na_attractions_address', true );
     $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
     $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
-    $na_attractions_marker = get_post_meta( get_the_ID(), 'na_attractions_marker', true );
+    $na_attractions_marker_id = get_post_meta( get_the_ID(), 'na_attractions_marker_id', true );
     $na_attractions_url = get_post_meta( get_the_ID(), 'na_attractions_url', true );
     $na_attractions_description = get_post_meta( get_the_ID(), 'na_attractions_description', true );
     $background = get_the_post_thumbnail_url( get_the_ID(), 'large' );

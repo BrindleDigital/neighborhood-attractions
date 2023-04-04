@@ -1,3 +1,7 @@
+## 1.0.6
+
+-   Missed one location for the variable
+
 ## 1.0.5
 
 -   Fixing a bug where two slightly different custom fields were used for the marker by accident and which outputted was unpredictable.
