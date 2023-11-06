@@ -1,3 +1,7 @@
+## 1.1
+
+-   Removing the ampersand from the title altogether when used in a google link.
+
 ## 1.0.6
 
 -   Missed one location for the variable
