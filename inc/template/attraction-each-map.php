@@ -4,6 +4,7 @@ add_action( 'na_do_attractions_each_map', 'na_attractions_each_map' );
 function na_attractions_each_map() {
     
     $title = get_the_title();
+    $title_processed = str_replace('&#038;', 'and', $title);
     $na_attractions_address = get_post_meta( get_the_ID(), 'na_attractions_address', true );
     $na_latitude = get_post_meta( get_the_ID(), 'na_latitude', true );
     $na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
@@ -35,7 +36,7 @@ function na_attractions_each_map() {
                 if ( $na_attractions_url )
                     printf( '<a class="url" href="%s" target="_blank">View online</a>', $na_attractions_url );
                     
-                printf( '<a class="directions" target="_blank" href="https://www.google.com/maps?q=%s %s">Get directions</a>', $title, $na_attractions_address );
+                printf( '<a class="directions" target="_blank" href="https://www.google.com/maps?q=%s %s">Get directions</a>', $na_attractions_address, $title_processed );
             
             echo '</p>';
                 
