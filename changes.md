@@ -1,3 +1,7 @@
+## 1.1.1
+
+-   Fixing an <? open statement to be <?php (triggering a fatal error on some platforms, notably Kinsta)
+
 ## 1.1
 
 -   Removing the ampersand from the title altogether when used in a google link.
