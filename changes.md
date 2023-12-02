@@ -1,3 +1,7 @@
+## 1.1.2
+
+-   Fixing a couple of errors revolving around options not being set
+
 ## 1.1.1
 
 -   Fixing an <? open statement to be <?php (triggering a fatal error on some platforms, notably Kinsta)
