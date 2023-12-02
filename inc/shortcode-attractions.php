@@ -28,21 +28,6 @@ function na_map_markup() {
 
 	$key = esc_attr( $options['google_api_key'] );
 	
-	
-	if ( isset( $options['google_api_key'] ) ) {
-		$map_styles = $options['google_map_style'];
-	} else {
-		$map_styles = null;
-	}
-		
-	// Localize the google maps script, then enqueue that
-	$maps_options = array(
-		'json_style' => json_decode( $map_styles ),
-		// 'marker_url' => get_field( 'google_map_marker', 'option' ),
-	);
-	
-	// Localize and load the map itself
-	wp_localize_script( 'neighborhood-attractions-map', 'options', $maps_options );
 	wp_enqueue_script( 'neighborhood-attractions-map');
 			
 	

@@ -1,3 +1,7 @@
+## 1.1.3
+
+-   Fixes for loading map on FSE themes
+
 ## 1.1.2
 
 -   Fixing a couple of errors revolving around options not being set
