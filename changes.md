@@ -1,3 +1,7 @@
+## 1.1.4
+
+-   Adding a wrapper, then code standards on a few files
+
 ## 1.1.3
 
 -   Fixes for loading map on FSE themes
