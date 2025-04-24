@@ -10,7 +10,7 @@ function na_register_cpt() {
 	$name_plural = 'Attractions';
 	$name_singular = 'Attraction';
 	$post_type = 'attractions';
-	$slug = 'attactions';
+	$slug = 'attractions';
 	$icon = 'location'; //* https://developer.wordpress.org/resource/dashicons/
 	$supports = array( 'title', 'thumbnail' );
 

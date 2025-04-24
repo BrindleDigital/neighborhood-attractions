@@ -1,3 +1,7 @@
+## 1.1.5
+
+-   Fixing a typo in the CPT slug
+
 ## 1.1.4
 
 -   Adding a wrapper, then code standards on a few files
