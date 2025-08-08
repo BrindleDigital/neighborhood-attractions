@@ -17,10 +17,16 @@ function na_enqueue() {
 	} else {
 		$map_styles = null;
 	}
+
+	$max_initial = 0;
+	if ( isset( $options['max_initial_attractions'] ) && intval( $options['max_initial_attractions'] ) > 0 ) {
+		$max_initial = intval( $options['max_initial_attractions'] );
+	}
 		
 	// Localize the google maps script, then enqueue that
 	$maps_options = array(
 		'json_style' => json_decode( $map_styles ),
+		'max_initial_attractions' => $max_initial,
 		// 'marker_url' => get_field( 'google_map_marker', 'option' ),
 	);
 	

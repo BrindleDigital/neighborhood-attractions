@@ -99,7 +99,8 @@ function na_attractions_markup() {
 	// need this whether we're actually filtering or not, so it goes with the display.
 	wp_enqueue_script( 'neighborhood-attractions-filter-ajax' );
 
-	echo '<div class="na-attractions"><div class="na-attractions-wrap"></div></div>';
+	// add a class that hides items until JS applies the limit to prevent flash
+	echo '<div class="na-attractions"><div class="na-attractions-wrap initial-hide"></div></div>';
 }
 
 /**

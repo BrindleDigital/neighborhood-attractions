@@ -40,6 +40,7 @@ function na_register_attractions_settings() {
 	add_settings_section( 'section_google_maps', 'Google Maps options', 'render_section_google_maps', 'na-admin-options' );
 	add_settings_field( 'google_api_key', 'Google Maps API key', 'render_google_api_key', 'na-admin-options', 'section_google_maps' );
 	add_settings_field( 'google_map_style', 'Google Maps style', 'render_google_map_style', 'na-admin-options', 'section_google_maps' );
+	add_settings_field( 'max_initial_attractions', 'Max attractions before Load More', 'render_max_initial_attractions', 'na-admin-options', 'section_google_maps' );
 	add_settings_section( 'section_geolocation', 'Geocoding options', 'render_section_geolocation', 'na-admin-options' );
 	add_settings_field( 'positionstack_api_key', 'Positionstack API key', 'render_positionstack_api_key', 'na-admin-options', 'section_geolocation' );
 }
@@ -64,6 +65,15 @@ function render_google_map_style() {
 	?>
 	<input type="text" style="width: 500px" name="attractions_settings[google_map_style]" value="<?php echo esc_attr( $options['google_map_style'] ); ?>">
 	<p class="description">You can generate this via <a href="https://snazzymaps.com/" target="_blank">SnazzyMaps</a> or <a href="https://mapstyle.withgoogle.com/" target="_blank">Google's legacy JSON style generator</a>. Just paste the json directly into here!</p>
+	<?php
+}
+
+function render_max_initial_attractions() {
+	$options = get_option( 'attractions_settings' );
+	$val = isset( $options['max_initial_attractions'] ) ? intval( $options['max_initial_attractions'] ) : '';
+	?>
+	<input type="number" min="0" style="width: 120px" name="attractions_settings[max_initial_attractions]" value="<?php echo esc_attr( $val ); ?>">
+	<p class="description">Show this many attractions in the grid before a "Load more" button appears. Leave blank or 0 to show all.</p>
 	<?php
 }
 
