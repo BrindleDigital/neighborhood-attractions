@@ -1,79 +1,84 @@
 .na-attractions-map {
-    width: 100%;
-    height: 500px;
-    min-height: 40vh;
-    background-color: #e6e6e6;
+	width: 100%;
+	height: 500px;
+	min-height: 40vh;
+	background-color: #e6e6e6;
 }
 
 .gm-style-iw-c {
-    // padding-right: 10px !important;
+	// padding-right: 10px !important;
+}
+
+.gm-style-iw-chr {
+	position: absolute;
+	right: 0;
 }
 
 .gm-style-iw-c,
 .gm-style-iw-d {
-    max-height: 500px !important;
-    overflow-y: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
+	max-height: 500px !important;
+	overflow-y: auto !important;
+	padding: 0 !important;
+	margin: 0 !important;
 
-    button[title='Close'] {
-        top: 0 !important;
-        right: 0 !important;
-        background-color: white !important;
-        opacity: 1 !important;
-    }
+	button[title='Close'] {
+		top: 0 !important;
+		right: 0 !important;
+		background-color: white !important;
+		opacity: 1 !important;
+	}
 }
 
 .map-property-popup {
-    max-width: 300px;
-    min-width: 300px;
-    width: 300px;
-    height: auto;
-    padding: 15px 15px 0;
+	max-width: 300px;
+	min-width: 300px;
+	width: 300px;
+	height: auto;
+	padding: 15px 15px 0;
 
-    .featured {
-        height: 0;
-        padding-top: 40%;
-        width: 100%;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        margin-bottom: 15px;
-    }
+	.featured {
+		height: 0;
+		padding-top: 40%;
+		width: 100%;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		margin-bottom: 15px;
+	}
 
-    h3 {
-        font-size: 20px;
-        margin-bottom: 0.3em;
-    }
+	h3 {
+		font-size: 20px;
+		margin-bottom: 0.3em;
+	}
 
-    p {
-        font-size: 16px;
-        line-height: 1.4;
-        margin: 0 0 0.3em;
-    }
+	p {
+		font-size: 16px;
+		line-height: 1.4;
+		margin: 0 0 0.3em;
+	}
 
-    p.buttons {
-        a {
-            display: inline-block;
-            margin-right: 10px;
+	p.buttons {
+		a {
+			display: inline-block;
+			margin-right: 10px;
 
-            @include mobile {
-                display: block;
-                margin: 0 0 5px 0;
-            }
+			@include mobile {
+				display: block;
+				margin: 0 0 5px 0;
+			}
 
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
 
-    a.post-edit-link {
-        color: #5a5a5a;
-        text-decoration: none;
+	a.post-edit-link {
+		color: #5a5a5a;
+		text-decoration: none;
 
-        &:hover {
-            color: inherit;
-        }
-    }
+		&:hover {
+			color: inherit;
+		}
+	}
 }

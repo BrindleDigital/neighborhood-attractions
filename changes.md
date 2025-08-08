@@ -1,3 +1,9 @@
+## 1.2
+
+-   Adding load more button
+-   Performance improvements
+-   Rebuilt the gulp setup to use webmix.
+
 ## 1.1.5
 
 -   Fixing a typo in the CPT slug

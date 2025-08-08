@@ -1,4 +1,14 @@
 jQuery(document).ready(function ($) {
+	// simple in-memory cache for filter responses keyed by category slug ('all' for no category)
+	var attractionsCache = {};
+
+	// helper to inject response HTML, re-apply limits, and notify map script
+	function renderAttractions(html) {
+		$('.na-attractions-wrap').html(html);
+		applyAttractionsLimit();
+		// trigger a custom event instead of relying on global ajaxComplete
+		$(document).trigger('naAttractionsUpdated');
+	}
 	// helper to apply initial limit & load more button
 	function applyAttractionsLimit() {
 		// localized via options.max_initial_attractions (comes from map script localization)
@@ -47,10 +57,18 @@ jQuery(document).ready(function ($) {
 		$(this).closest('.na-attractions-load-more-wrap').remove();
 	});
 
-	// filter on click
+	// filter on click (with caching)
 	$('.attraction-type-button').on('click', function () {
 		$('.attraction-type-button').removeClass('active');
 		$(this).addClass('active');
+
+		var slug = $(this).attr('data-slug') || 'all';
+
+		// serve from cache if available
+		if (attractionsCache.hasOwnProperty(slug)) {
+			renderAttractions(attractionsCache[slug]);
+			return;
+		}
 
 		$.ajax({
 			type: 'POST',
@@ -58,18 +76,27 @@ jQuery(document).ready(function ($) {
 			dataType: 'html',
 			data: {
 				action: 'filter_attractions',
-				category: $(this).attr('data-slug'),
+				category: slug === 'all' ? undefined : slug,
 			},
 			success: function (res) {
-				$('.na-attractions-wrap').html(res);
-				applyAttractionsLimit();
+				// cache & render
+				attractionsCache[slug] = res;
+				renderAttractions(res);
 			},
 		});
 	});
 
 	// filter on load
 	function filterAttractionsOnLoad() {
-		$('.attraction-type-button').first().addClass('active');
+		var $first = $('.attraction-type-button').first();
+		$first.addClass('active');
+		var slug = $first.attr('data-slug') || 'all';
+
+		// if cached (e.g., primed elsewhere) use it
+		if (attractionsCache.hasOwnProperty(slug)) {
+			renderAttractions(attractionsCache[slug]);
+			return;
+		}
 
 		$.ajax({
 			type: 'POST',
@@ -79,8 +106,8 @@ jQuery(document).ready(function ($) {
 				action: 'filter_attractions',
 			},
 			success: function (res) {
-				$('.na-attractions-wrap').html(res);
-				applyAttractionsLimit();
+				attractionsCache[slug] = res; // cache "all"
+				renderAttractions(res);
 			},
 		});
 	}
