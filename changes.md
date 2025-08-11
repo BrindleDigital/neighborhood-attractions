@@ -1,3 +1,7 @@
+## 1.2.1
+
+-   Fixing bug where the "always show" locations were showing in the results as well, as some of our new code was overriding the hiding of those in the results. We want those to always be hidden in the results.
+
 ## 1.2
 
 -   Adding load more button

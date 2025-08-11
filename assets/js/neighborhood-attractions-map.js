@@ -49,6 +49,7 @@ jQuery(document).ready(function ($) {
 		locationsArray = [];
 
 		// get the positions
+		// include both list items and hidden map-only items
 		$('.na-attractions .type-attractions').each(function () {
 			lat = $(this).attr('data-latitude');
 			long = $(this).attr('data-longitude');

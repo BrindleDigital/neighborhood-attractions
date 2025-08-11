@@ -21,7 +21,10 @@ jQuery(document).ready(function ($) {
 		// remove any prior button
 		$('.na-attractions-load-more').remove();
 
-		var $items = $('.na-attractions-wrap > .type-attractions');
+		// exclude map-only items from list logic entirely
+		var $items = $('.na-attractions-wrap > .type-attractions').not(
+			'.na-map-only'
+		);
 		if (!maxInitial || $items.length <= maxInitial) {
 			// show all if no limit
 			$items.show();
@@ -37,6 +40,9 @@ jQuery(document).ready(function ($) {
 				$(this).show();
 			}
 		});
+
+		// ensure any map-only items remain hidden from list view
+		$('.na-attractions-wrap > .type-attractions.na-map-only').hide();
 
 		// inject load more button after grid
 		if ($('.na-attractions-load-more').length === 0) {

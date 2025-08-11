@@ -231,7 +231,7 @@ function na_attractions_details_metabox_callback( $post ) {
                 <ul class="checkboxes">
                     <li class="checkbox">
                         <input type="checkbox" id="na_attractions_always_show" name="na_attractions_always_show" <?php checked( $na_attractions_always_show, '1' ); ?>>
-                        <label for="na_attractions_always_show">If you'd like this location to always show, no matter what, toggle this checkbox on (a typical use case would be an apartment complex location, when most of the other locations being shown are nearby attractions).</label>
+                        <label for="na_attractions_always_show">If you'd like this location to always show on the map, no matter what (but never show in the results), toggle this checkbox on (a typical use case would be an apartment complex location, when most of the other locations being shown are nearby attractions).</label>
                     </li>
                 </ul>
                 

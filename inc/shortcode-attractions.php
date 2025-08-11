@@ -232,10 +232,13 @@ function na_filter_attractions() {
 
 			$class = implode( ' ', get_post_class() );
 
-			printf( '<div style="display: none;" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', esc_attr( $class ), esc_attr( $na_latitude ), esc_attr( $na_longitude ), esc_attr( $na_attractions_marker_id ), (int) get_the_ID(), esc_attr( $count ) );
+			// Add a flag class so JS and CSS can treat these as map-only items
+			$class .= ' na-map-only';
 
+			printf( '<div style="display: none;" aria-hidden="true" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', esc_attr( $class ), esc_attr( $na_latitude ), esc_attr( $na_longitude ), esc_attr( $na_attractions_marker_id ), (int) get_the_ID(), esc_attr( $count ) );
+
+				// Only render map markup so these never appear in results
 				do_action( 'na_do_attractions_each_map' );
-				do_action( 'na_do_attractions_each_list' );
 
 			echo '</div>';
 
