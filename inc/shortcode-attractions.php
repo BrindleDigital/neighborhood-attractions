@@ -178,10 +178,37 @@ function na_filter_attractions() {
 
 			$custom_query->the_post();
 
-			$na_latitude              = esc_attr( get_post_meta( get_the_ID(), 'na_latitude', true ) );
-			$na_longitude             = esc_attr( get_post_meta( get_the_ID(), 'na_longitude', true ) );
-			$na_attractions_marker_id = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker_id', true ), 'full' );
-			$na_attractions_marker_height = esc_attr( get_post_meta( get_the_ID(), 'na_attractions_marker_height', true ) );
+			$na_latitude  = esc_attr( get_post_meta( get_the_ID(), 'na_latitude', true ) );
+			$na_longitude = esc_attr( get_post_meta( get_the_ID(), 'na_longitude', true ) );
+
+			// Prefer post-specific marker. If none, fall back to the first assigned attractiontypes term marker (if any).
+			$post_marker_id = get_post_meta( get_the_ID(), 'na_attractions_marker_id', true );
+			$post_marker_url = $post_marker_id ? wp_get_attachment_url( $post_marker_id, 'full' ) : '';
+			$post_marker_height = get_post_meta( get_the_ID(), 'na_attractions_marker_height', true );
+
+			$na_attractions_marker_id = '';
+			$na_attractions_marker_height = '';
+
+			if ( $post_marker_url ) {
+				$na_attractions_marker_id = $post_marker_url;
+				if ( $post_marker_height ) {
+					$na_attractions_marker_height = esc_attr( $post_marker_height );
+				}
+			} else {
+				$terms = get_the_terms( get_the_ID(), 'attractiontypes' );
+				if ( $terms && ! is_wp_error( $terms ) ) {
+					$term = reset( $terms );
+					$term_marker_id = get_term_meta( $term->term_id, 'na_attractiontype_marker_id', true );
+					$term_marker_url = $term_marker_id ? wp_get_attachment_url( $term_marker_id, 'full' ) : '';
+					if ( $term_marker_url ) {
+						$na_attractions_marker_id = $term_marker_url;
+						$term_marker_height = get_term_meta( $term->term_id, 'na_attractiontype_marker_height', true );
+						if ( $term_marker_height ) {
+							$na_attractions_marker_height = esc_attr( $term_marker_height );
+						}
+					}
+				}
+			}
 
 			$class = implode( ' ', get_post_class() );
 
@@ -227,10 +254,37 @@ function na_filter_attractions() {
 
 			$always_show_attractions->the_post();
 
-			$na_latitude              = get_post_meta( get_the_ID(), 'na_latitude', true );
-			$na_longitude             = get_post_meta( get_the_ID(), 'na_longitude', true );
-			$na_attractions_marker_id = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker_id', true ), 'full' );
-			$na_attractions_marker_height = esc_attr( get_post_meta( get_the_ID(), 'na_attractions_marker_height', true ) );
+			$na_latitude  = get_post_meta( get_the_ID(), 'na_latitude', true );
+			$na_longitude = get_post_meta( get_the_ID(), 'na_longitude', true );
+
+			// Prefer post-specific marker. If none, fall back to the first assigned attractiontypes term marker (if any).
+			$post_marker_id = get_post_meta( get_the_ID(), 'na_attractions_marker_id', true );
+			$post_marker_url = $post_marker_id ? wp_get_attachment_url( $post_marker_id, 'full' ) : '';
+			$post_marker_height = get_post_meta( get_the_ID(), 'na_attractions_marker_height', true );
+
+			$na_attractions_marker_id = '';
+			$na_attractions_marker_height = '';
+
+			if ( $post_marker_url ) {
+				$na_attractions_marker_id = $post_marker_url;
+				if ( $post_marker_height ) {
+					$na_attractions_marker_height = esc_attr( $post_marker_height );
+				}
+			} else {
+				$terms = get_the_terms( get_the_ID(), 'attractiontypes' );
+				if ( $terms && ! is_wp_error( $terms ) ) {
+					$term = reset( $terms );
+					$term_marker_id = get_term_meta( $term->term_id, 'na_attractiontype_marker_id', true );
+					$term_marker_url = $term_marker_id ? wp_get_attachment_url( $term_marker_id, 'full' ) : '';
+					if ( $term_marker_url ) {
+						$na_attractions_marker_id = $term_marker_url;
+						$term_marker_height = get_term_meta( $term->term_id, 'na_attractiontype_marker_height', true );
+						if ( $term_marker_height ) {
+							$na_attractions_marker_height = esc_attr( $term_marker_height );
+						}
+					}
+				}
+			}
 
 			$class = implode( ' ', get_post_class() );
 
