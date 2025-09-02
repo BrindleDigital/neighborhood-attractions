@@ -57,7 +57,16 @@ jQuery(document).ready(function ($) {
 			content = $(this).find('.map-markup').html();
 			id = $(this).attr('data-id');
 			markerImage = $(this).attr('data-marker');
-			locationsArray.push([lat, long, title, content, id, markerImage]);
+			markerHeight = $(this).attr('data-marker-height');
+			locationsArray.push([
+				lat,
+				long,
+				title,
+				content,
+				id,
+				markerImage,
+				markerHeight,
+			]);
 		});
 	}
 
@@ -78,6 +87,7 @@ jQuery(document).ready(function ($) {
 			var content = row[3];
 			var id = row[4];
 			var markerImage = row[5];
+			var markerHeight = row[6];
 			var theposition = new google.maps.LatLng(latitude, longitude);
 
 			var markerOpts = {
@@ -85,11 +95,42 @@ jQuery(document).ready(function ($) {
 				map: map,
 				title: row[2] || '',
 			};
+			// default height if not set
+			var finalHeight = markerHeight ? parseInt(markerHeight, 10) : 40;
+
 			if (markerImage) {
+				// create marker with the URL first; we'll update icon once we load the image and compute aspect ratio
 				markerOpts.icon = markerImage;
 			}
 			var marker = new google.maps.Marker(markerOpts);
 			bounds.extend(theposition);
+
+			// If we have an image URL, load it to compute aspect ratio and then set a scaledSize icon
+			if (markerImage) {
+				var img = new Image();
+				img.onload = (function (m, url, h) {
+					return function () {
+						var aspect =
+							this.width && this.height
+								? this.width / this.height
+								: 1;
+						var finalWidth = Math.max(1, Math.round(h * aspect));
+						m.setIcon({
+							url: url,
+							scaledSize: new google.maps.Size(finalWidth, h),
+							origin: new google.maps.Point(0, 0),
+							anchor: new google.maps.Point(
+								Math.round(finalWidth / 2),
+								h
+							),
+						});
+					};
+				})(marker, markerImage, finalHeight);
+				img.onerror = function () {
+					// leave default icon (URL) if image fails to load
+				};
+				img.src = markerImage;
+			}
 
 			marker.infowindow = new google.maps.InfoWindow({
 				content:

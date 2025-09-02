@@ -167,7 +167,7 @@ function na_attractions_details_metabox_callback( $post ) {
 		
 		<script>
 			jQuery(document).ready(function( $ ) {
-	
+
 				jQuery(function($) {
 					var custom_image_frame;
 					$('#na_attractions_marker_button').click(function(e) {
@@ -186,28 +186,48 @@ function na_attractions_details_metabox_callback( $post ) {
 						custom_image_frame.on('select', function() {
 							var attachment = custom_image_frame.state().get('selection').first().toJSON();
 							console.log( attachment );
-							$( '#na_attractions_marker_id' ).attr( 'value', attachment.id );
-							$( '#na_attractions_marker_preview' ).attr( 'src', attachment.url );
+							$( '#na_attractions_marker_id' ).val( attachment.id );
+							$( '#na_attractions_marker_preview' ).attr( 'src', attachment.url ).show();
 						});
 						custom_image_frame.open();
 					});
-				
+
+					// clear marker button handler (works even if button added later)
+					$(document).on('click', '#na_attractions_marker_clear_button', function(e) {
+						e.preventDefault();
+						$('#na_attractions_marker_id').val('');
+						$('#na_attractions_marker_preview').attr('src', '').hide();
+					});
+
 				});
-			
+
 			});
 		</script>
 		
 		<?php $na_attractions_marker_id = get_post_meta( $post->ID, 'na_attractions_marker_id', true ); ?>
 		<?php $na_attractions_marker_url = wp_get_attachment_url( $na_attractions_marker_id ); ?>
+		<?php $na_attractions_marker_height = get_post_meta( $post->ID, 'na_attractions_marker_height', true ); ?>
 		<div class="na-meta-option">
 			<div class="column">
 				<label for="na_attractions_marker_id">Marker</label>
 			</div>
 			<div class="column">
 				<input type="hidden" name="na_attractions_marker_id" id="na_attractions_marker_id" value="<?php echo esc_attr( $na_attractions_marker_id ); ?>">
-				<img id="na_attractions_marker_preview" src="<?php echo esc_url( $na_attractions_marker_url ); ?>" style="max-width:100px;height:auto;display:block;margin-bottom:10px;">
+				<?php $na_marker_img_style = $na_attractions_marker_url ? 'display:block;' : 'display:none;'; ?>
+				<img id="na_attractions_marker_preview" src="<?php echo esc_url( $na_attractions_marker_url ); ?>" style="max-width:100px;height:auto;<?php echo $na_marker_img_style; ?>margin-bottom:10px;">
 				<button id="na_attractions_marker_button" class="button">Select Image</button>
+				<button id="na_attractions_marker_clear_button" class="button" style="margin-left:8px;">Clear image</button>
 				<p class="description">Upload a custom marker for this attraction. Suggested size: 36x36 pixels (but it will be rendered at full size).</p>
+			</div>
+		</div>
+		
+		<div class="na-meta-option">
+			<div class="column">
+				<label for="na_attractions_marker_height">Marker height (px)</label>
+			</div>
+			<div class="column">
+				<input type="number" step="1" min="1" id="na_attractions_marker_height" name="na_attractions_marker_height" value="<?php echo esc_attr( $na_attractions_marker_height ); ?>">
+				<p class="description">Set the marker height in pixels. Width will be calculated separately based on the image aspect ratio.</p>
 			</div>
 		</div>
 		
@@ -268,11 +288,26 @@ function save_custom_metabox( $post_id ) {
 	if ( isset( $_POST['na_attractions_url'] ) )
 		update_post_meta( $post_id, 'na_attractions_url', sanitize_text_field( $_POST['na_attractions_url'] ) );
 		
-	if ( isset( $_POST['na_attractions_marker_id'] ) )
-		update_post_meta( $post_id, 'na_attractions_marker_id', $_POST['na_attractions_marker_id'] );
+	if ( isset( $_POST['na_attractions_marker_id'] ) ) {
+		$marker_id = sanitize_text_field( wp_unslash( $_POST['na_attractions_marker_id'] ) );
+		if ( '' === $marker_id ) {
+			delete_post_meta( $post_id, 'na_attractions_marker_id' );
+		} else {
+			update_post_meta( $post_id, 'na_attractions_marker_id', $marker_id );
+		}
+	}
 		
 	if ( isset( $_POST['na_attractions_description'] ) )
 		update_post_meta( $post_id, 'na_attractions_description', sanitize_text_field( $_POST['na_attractions_description'] ) );
+		
+	if ( isset( $_POST['na_attractions_marker_height'] ) ) {
+		$height = intval( $_POST['na_attractions_marker_height'] );
+		if ( $height > 0 ) {
+			update_post_meta( $post_id, 'na_attractions_marker_height', $height );
+		} else {
+			delete_post_meta( $post_id, 'na_attractions_marker_height' );
+		}
+	}
 		
 	if ( isset( $_POST['na_attractions_always_show'] ) ) {
 		update_post_meta( $post_id, 'na_attractions_always_show', true );        

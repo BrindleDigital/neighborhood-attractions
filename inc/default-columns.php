@@ -7,6 +7,7 @@ function na_default_admin_columns( $columns ) {
 		'cb' => '<input type="checkbox" />',
 		'image' => __( 'Image' ),
 		'na_attractions_marker_id' => __( 'Marker' ),
+		'na_attractions_marker_height' => __( 'Height', 'na' ),
 		'title' => __( 'Title', 'na' ),
 		'na_attractions_address' => __( 'Address', 'na' ),
 		'na_attractions_description' => __( 'Description', 'na' ),
@@ -38,6 +39,10 @@ function na_attractions_default_column_content( $column, $post_id ) {
 			width: 56px;
 		}
 		
+		th#na_attractions_marker_height {
+			width: 90px;
+		}
+		
 		th#na_attractions_address {
 			width: 300px;
 		}
@@ -56,6 +61,15 @@ function na_attractions_default_column_content( $column, $post_id ) {
 		
 	if ( 'na_attractions_marker_id' === $column )        
 		echo wp_get_attachment_image( get_post_meta( $post_id, 'na_attractions_marker_id', true ), array( 36, 36 ) );
+
+	if ( 'na_attractions_marker_height' === $column ) {
+		$height = get_post_meta( $post_id, 'na_attractions_marker_height', true );
+		if ( $height ) {
+			echo esc_html( intval( $height ) ) . 'px';
+		} else {
+			echo '—';
+		}
+	}
 	
 	if ( 'title' === $column )
 		echo esc_attr( get_the_title( $post_id ) );

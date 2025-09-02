@@ -181,10 +181,11 @@ function na_filter_attractions() {
 			$na_latitude              = esc_attr( get_post_meta( get_the_ID(), 'na_latitude', true ) );
 			$na_longitude             = esc_attr( get_post_meta( get_the_ID(), 'na_longitude', true ) );
 			$na_attractions_marker_id = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker_id', true ), 'full' );
+			$na_attractions_marker_height = esc_attr( get_post_meta( get_the_ID(), 'na_attractions_marker_height', true ) );
 
 			$class = implode( ' ', get_post_class() );
 
-			printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', esc_attr( $class ), esc_attr( $na_latitude ), esc_attr( $na_longitude ), esc_attr( $na_attractions_marker_id ), (int) get_the_ID(), esc_attr( $count ) );
+			printf( '<div class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-marker-height="%s" data-id="%s" data-marker-id="%s">', esc_attr( $class ), esc_attr( $na_latitude ), esc_attr( $na_longitude ), esc_attr( $na_attractions_marker_id ), esc_attr( $na_attractions_marker_height ), (int) get_the_ID(), esc_attr( $count ) );
 
 				do_action( 'na_do_attractions_each_map' );
 				do_action( 'na_do_attractions_each_list' );
@@ -229,13 +230,14 @@ function na_filter_attractions() {
 			$na_latitude              = get_post_meta( get_the_ID(), 'na_latitude', true );
 			$na_longitude             = get_post_meta( get_the_ID(), 'na_longitude', true );
 			$na_attractions_marker_id = wp_get_attachment_url( get_post_meta( get_the_ID(), 'na_attractions_marker_id', true ), 'full' );
+			$na_attractions_marker_height = esc_attr( get_post_meta( get_the_ID(), 'na_attractions_marker_height', true ) );
 
 			$class = implode( ' ', get_post_class() );
 
 			// Add a flag class so JS and CSS can treat these as map-only items
 			$class .= ' na-map-only';
 
-			printf( '<div style="display: none;" aria-hidden="true" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-id="%s" data-marker-id="%s">', esc_attr( $class ), esc_attr( $na_latitude ), esc_attr( $na_longitude ), esc_attr( $na_attractions_marker_id ), (int) get_the_ID(), esc_attr( $count ) );
+			printf( '<div style="display: none;" aria-hidden="true" class="%s" data-latitude="%s" data-longitude="%s" data-marker="%s" data-marker-height="%s" data-id="%s" data-marker-id="%s">', esc_attr( $class ), esc_attr( $na_latitude ), esc_attr( $na_longitude ), esc_attr( $na_attractions_marker_id ), esc_attr( $na_attractions_marker_height ), (int) get_the_ID(), esc_attr( $count ) );
 
 				// Only render map markup so these never appear in results
 				do_action( 'na_do_attractions_each_map' );

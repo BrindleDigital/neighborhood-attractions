@@ -1,3 +1,11 @@
+## 1.3
+
+-   Adding capability to clear an existing image
+-   Adding a new 'height' attribute to allow icons to have their height selected manually
+-   Adding a base default of 40px tall for markers to render at, allowing for any sized icon to be used safely.
+-   Adding a new column for the height to show that in the editing table
+-   Updating the admin columns pro field for the height to make it inline-editable
+
 ## 1.2.1
 
 -   Fixing bug where the "always show" locations were showing in the results as well, as some of our new code was overriding the hiding of those in the results. We want those to always be hidden in the results.
