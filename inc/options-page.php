@@ -25,6 +25,66 @@ function na_add_attractions_settings_page() {
 	);
 }
 
+// Export via admin-post so headers can be sent before admin page HTML
+add_action( 'admin_post_na_export_attractions', 'na_handle_export_attractions' );
+function na_handle_export_attractions() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( 'Permission denied.' );
+	}
+
+	if ( ! check_admin_referer( 'na_export_attractions' ) ) {
+		wp_die( 'Invalid export request.' );
+	}
+
+	$expected_headers = array( 'title', 'address', 'type', 'url', 'description', 'latitude', 'longitude' );
+
+	$args = array(
+		'post_type' => 'attractions',
+		'posts_per_page' => -1,
+		'post_status' => 'any',
+	);
+	$posts = get_posts( $args );
+
+	// Send CSV headers and output
+	header( 'Content-Type: text/csv; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename=attractions-export.csv' );
+	$output = fopen( 'php://output', 'w' );
+	if ( $output ) {
+		fputcsv( $output, $expected_headers );
+		foreach ( $posts as $p ) {
+			$post_id = $p->ID;
+			$title = html_entity_decode( get_the_title( $post_id ) );
+			$address = get_post_meta( $post_id, 'na_attractions_address', true );
+			$lat = get_post_meta( $post_id, 'na_latitude', true );
+			$lng = get_post_meta( $post_id, 'na_longitude', true );
+			$url = get_post_meta( $post_id, 'na_attractions_url', true );
+			$description = get_post_meta( $post_id, 'na_attractions_description', true );
+
+			$terms = get_the_terms( $post_id, 'attractiontypes' );
+			$type_names = array();
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				foreach ( $terms as $t ) {
+					$type_names[] = $t->name;
+				}
+			}
+
+			$row = array(
+				$title,
+				$address,
+				implode( ',', $type_names ),
+				$url,
+				$description,
+				$lat,
+				$lng,
+			);
+
+			fputcsv( $output, $row );
+		}
+		fclose( $output );
+	}
+	exit;
+}
+
 
 function na_render_attractions_settings() {
 	?>
@@ -105,6 +165,62 @@ function render_positionstack_api_key() {
 function na_render_attractions_imports() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
+	}
+
+	// Export existing attractions to CSV when requested (nonce-protected)
+	if ( isset( $_GET['na_export_attractions'] ) ) {
+		if ( ! check_admin_referer( 'na_export_attractions' ) ) {
+			wp_die( 'Invalid export request.' );
+		}
+
+		$expected_headers = array( 'title', 'address', 'type', 'url', 'description', 'latitude', 'longitude' );
+
+		$args = array(
+			'post_type' => 'attractions',
+			'posts_per_page' => -1,
+			'post_status' => 'any',
+		);
+		$posts = get_posts( $args );
+
+		header( 'Content-Type: text/csv; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename=attractions-export.csv' );
+		$output = fopen( 'php://output', 'w' );
+		if ( $output ) {
+			// write header
+			fputcsv( $output, $expected_headers );
+
+			foreach ( $posts as $p ) {
+				$post_id = $p->ID;
+				$title = html_entity_decode( get_the_title( $post_id ) );
+				$address = get_post_meta( $post_id, 'na_attractions_address', true );
+				$lat = get_post_meta( $post_id, 'na_latitude', true );
+				$lng = get_post_meta( $post_id, 'na_longitude', true );
+				$url = get_post_meta( $post_id, 'na_attractions_url', true );
+				$description = get_post_meta( $post_id, 'na_attractions_description', true );
+
+				$terms = get_the_terms( $post_id, 'attractiontypes' );
+				$type_names = array();
+				if ( $terms && ! is_wp_error( $terms ) ) {
+					foreach ( $terms as $t ) {
+						$type_names[] = $t->name;
+					}
+				}
+
+				$row = array(
+					$title,
+					$address,
+					implode( ',', $type_names ),
+					$url,
+					$description,
+					$lat,
+					$lng,
+				);
+
+				fputcsv( $output, $row );
+			}
+			fclose( $output );
+		}
+		exit;
 	}
 
 	// Handle form submission
@@ -308,7 +424,12 @@ function na_render_attractions_imports() {
 		<h1>Attractions Imports</h1>
 
 		<p>Use the CSV upload to create attractions in bulk. Download a sample CSV and follow the exact column headers:</p>
-		<p><a href="<?php echo esc_url( plugins_url( '../assets/csv/sample-upload.csv', __FILE__ ) ); ?>">Download sample-upload.csv</a></p>
+		<p>
+			<a href="<?php echo esc_url( plugins_url( '../assets/csv/sample-upload.csv', __FILE__ ) ); ?>">Download sample-upload.csv</a>
+			&nbsp;|&nbsp;
+			<?php $export_url = wp_nonce_url( admin_url( 'admin-post.php?action=na_export_attractions' ), 'na_export_attractions' ); ?>
+			<a href="<?php echo esc_url( $export_url ); ?>" onclick="return confirm('Export all attractions to CSV?');">Download all attractions (CSV)</a>
+		</p>
 
 		<form method="post" enctype="multipart/form-data">
 			<?php wp_nonce_field( 'na_imports_nonce', 'na_imports_nonce_field' ); ?>
