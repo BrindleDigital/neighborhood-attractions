@@ -1,3 +1,7 @@
+## 1.4
+
+-   Adding images and heights to the attraction-types taxonomy and all of the logic that goes along with that, allowing for the icons to be set on a per-category basis rather than a per-item basis.
+
 ## 1.3
 
 -   Adding capability to clear an existing image
