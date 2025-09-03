@@ -10,12 +10,12 @@ function na_default_admin_columns( $columns ) {
 		'na_attractions_marker_height' => __( 'Height', 'na' ),
 		'title' => __( 'Title', 'na' ),
 		'na_attractions_address' => __( 'Address', 'na' ),
+		'attraction_type' => __( 'Type', 'na' ),
+		'na_attractions_url' => __( 'URL', 'na' ),
 		'na_attractions_description' => __( 'Description', 'na' ),
 		'na_latitude' => __( 'Latitude', 'na' ),
 		'na_longitude' => __( 'Longitude', 'na' ),
-		'attraction_type' => __( 'Attraction Type', 'na' ),
-		'na_attractions_url' => __( 'URL', 'na' ),
-		'na_attractions_always_show' => __( 'Always Show on map?', 'na' ),
+		'na_attractions_always_show' => __( 'Always show on map?', 'na' ),
 	);
 	
 	return $columns;
@@ -36,20 +36,48 @@ function na_attractions_default_column_content( $column, $post_id ) {
 		}
 		
 		th#na_attractions_marker_id {
-			width: 56px;
+			width: 50px;
+		}
+		
+		td.column-na_attractions_marker_id {
+			width: 50px;
+		}
+		
+		td.column-na_attractions_marker_id img {
+			height: 20px !important;
+			width: auto !important;
 		}
 		
 		th#na_attractions_marker_height {
-			width: 90px;
+			width: 50px;
 		}
 		
 		th#na_attractions_address {
-			width: 300px;
+			width: 170px;
+		}
+
+		th#na_attractions_url {
+			width: 150px;
+		}
+
+		/* truncate long URLs to one line with ellipsis */
+		td.column-na_attractions_url,
+		td.column-na_attractions_url a {
+			display: inline-block;
+			max-width: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 		
 		th#na_latitude,
 		th#na_longitude {
 			width: 100px;
+		}
+
+		th#na_attractions_always_show,
+		td.column-na_attractions_always_show {
+			min-width: 200px;
 		}
 	</style>
 	
@@ -59,15 +87,48 @@ function na_attractions_default_column_content( $column, $post_id ) {
 	if ( 'image' === $column )
 		echo get_the_post_thumbnail( $post_id, array(60, 60) );
 		
-	if ( 'na_attractions_marker_id' === $column )        
-		echo wp_get_attachment_image( get_post_meta( $post_id, 'na_attractions_marker_id', true ), array( 36, 36 ) );
+	if ( 'na_attractions_marker_id' === $column ) {
+		$post_marker_id = get_post_meta( $post_id, 'na_attractions_marker_id', true );
+		if ( $post_marker_id ) {
+			echo wp_get_attachment_image( $post_marker_id, array( 36, 36 ) );
+		} else {
+			// No post-level marker; try to show a term-level marker (ghosted)
+			$terms = get_the_terms( $post_id, 'attractiontypes' );
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				foreach ( $terms as $term ) {
+					$term_marker_id = get_term_meta( $term->term_id, 'na_attractiontype_marker_id', true );
+					if ( $term_marker_id ) {
+						// show ghosted term marker
+						echo wp_get_attachment_image( $term_marker_id, array( 36, 36 ), false, array( 'style' => 'opacity:0.5;' ) );
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	if ( 'na_attractions_marker_height' === $column ) {
 		$height = get_post_meta( $post_id, 'na_attractions_marker_height', true );
 		if ( $height ) {
 			echo esc_html( intval( $height ) ) . 'px';
 		} else {
-			echo '—';
+			// no post-level height — if there's no post-level marker, show term-level height ghosted
+			$post_marker_id = get_post_meta( $post_id, 'na_attractions_marker_id', true );
+			if ( ! $post_marker_id ) {
+				$terms = get_the_terms( $post_id, 'attractiontypes' );
+				if ( $terms && ! is_wp_error( $terms ) ) {
+					foreach ( $terms as $term ) {
+						$term_marker_id = get_term_meta( $term->term_id, 'na_attractiontype_marker_id', true );
+						$term_height = get_term_meta( $term->term_id, 'na_attractiontype_marker_height', true );
+						if ( $term_marker_id && $term_height ) {
+							echo '<span style="opacity:0.5;">' . esc_html( intval( $term_height ) ) . 'px</span>';
+							break;
+						}
+					}
+				}
+			} else {
+				echo '—';
+			}
 		}
 	}
 	
