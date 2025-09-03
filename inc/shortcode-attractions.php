@@ -68,12 +68,20 @@ function na_categories_markup() {
 
 	$terms = get_terms( 'attractiontypes' );
 
-	// bail if there aren't any terms.
-	if ( ! $terms ) {
+	// bail if there aren't any terms or an error occurred.
+	if ( empty( $terms ) || is_wp_error( $terms ) ) {
 		return;
 	}
 
-	$count = count( $terms );
+	// filter out any terms with empty names
+	$visible_terms = array();
+	foreach ( $terms as $term ) {
+		if ( isset( $term->name ) && '' !== trim( $term->name ) ) {
+			$visible_terms[] = $term;
+		}
+	}
+
+	$count = count( $visible_terms );
 
 	// bail if we have less than two active terms.
 	if ( $count < 2 ) {
@@ -82,7 +90,7 @@ function na_categories_markup() {
 
 	echo '<div class="na-attractions-categories">';
 		echo '<ul class="na-attractions-categories-wrap">';
-	foreach ( $terms as $term ) {
+	foreach ( $visible_terms as $term ) {
 		printf( '<li><button class="attraction-type-button" data-slug="%s"><span class="attractiontype">%s</span></button></li>', esc_attr( $term->slug ), esc_html( $term->name ) );
 	}
 		echo '</ul>';

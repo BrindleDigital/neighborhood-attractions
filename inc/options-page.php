@@ -17,8 +17,8 @@ function na_add_attractions_settings_page() {
 	// Add an Imports page directly beneath the Settings page
 	add_submenu_page(
 		'edit.php?post_type=attractions',   // The parent page's menu slug
-		'Attractions Imports',              // Page title
-		'Attractions Imports',              // Menu title
+		'Attraction Imports',              // Page title
+		'Attraction Imports',              // Menu title
 		'manage_options',                   // Capability required to access the page
 		'attractions-imports',              // Menu slug
 		'na_render_attractions_imports'     // Callback function to render the imports page
@@ -427,8 +427,12 @@ function na_render_attractions_imports() {
 		<p>
 			<a href="<?php echo esc_url( plugins_url( '../assets/csv/sample-upload.csv', __FILE__ ) ); ?>">Download sample-upload.csv</a>
 			&nbsp;|&nbsp;
-			<?php $export_url = wp_nonce_url( admin_url( 'admin-post.php?action=na_export_attractions' ), 'na_export_attractions' ); ?>
-			<a href="<?php echo esc_url( $export_url ); ?>" onclick="return confirm('Export all attractions to CSV?');">Download all attractions (CSV)</a>
+			<?php
+				$export_url = wp_nonce_url( admin_url( 'admin-post.php?action=na_export_attractions' ), 'na_export_attractions' );
+				$all_attractions = get_posts( array( 'post_type' => 'attractions', 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids' ) );
+				$total_attractions = is_array( $all_attractions ) ? count( $all_attractions ) : 0;
+			?>
+			<a href="<?php echo esc_url( $export_url ); ?>" onclick="return confirm('Export all attractions to CSV?');">Download all <?php echo intval( $total_attractions ); ?> attractions (.csv)</a>
 		</p>
 
 		<form method="post" enctype="multipart/form-data">
@@ -444,11 +448,11 @@ function na_render_attractions_imports() {
 				<tr>
 					<th scope="row">If a title already exists</th>
 					<td>
-						<?php $existing_behavior = isset( $_POST['na_import_existing'] ) ? $_POST['na_import_existing'] : 'skip'; ?>
-						<fieldset>
-							<label><input type="radio" name="na_import_existing" value="skip" <?php checked( $existing_behavior, 'skip' ); ?>> Skip existing attractions (default)</label><br>
-							<label><input type="radio" name="na_import_existing" value="update" <?php checked( $existing_behavior, 'update' ); ?>> Update existing attractions with CSV data</label>
-						</fieldset>
+						<?php $existing_behavior = isset( $_POST['na_import_existing'] ) ? $_POST['na_import_existing'] : 'update'; ?>
+								<fieldset>
+									<label><input type="radio" name="na_import_existing" value="skip" <?php checked( $existing_behavior, 'skip' ); ?>> Skip existing attractions</label><br>
+									<label><input type="radio" name="na_import_existing" value="update" <?php checked( $existing_behavior, 'update' ); ?>> Update existing attractions with CSV data (default)</label>
+								</fieldset>
 						<p class="description">Choose whether rows with titles that exactly match an existing attraction should be skipped or used to update the existing attraction.</p>
 					</td>
 				</tr>
