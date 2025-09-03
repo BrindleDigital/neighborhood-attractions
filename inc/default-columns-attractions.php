@@ -144,8 +144,14 @@ function na_attractions_default_column_content( $column, $post_id ) {
 	if ( 'na_longitude' === $column )
 		echo esc_attr( get_post_meta( $post_id, 'na_longitude', true ) );
 		
-	if ( 'na_attractions_url' === $column )
-		echo esc_attr( get_post_meta( $post_id, 'na_attractions_url', true ) );
+	if ( 'na_attractions_url' === $column ) {
+		$raw_url = get_post_meta( $post_id, 'na_attractions_url', true );
+		if ( $raw_url ) {
+			$url = esc_url( $raw_url );
+			// show the URL as a truncated link (CSS above handles truncation)
+			echo '<a href="' . $url . '" target="_blank" rel="noopener noreferrer">' . esc_html( $raw_url ) . '</a>';
+		}
+	}
 		
 	if ( 'na_attractions_description' === $column )
 		echo esc_attr( get_post_meta( $post_id, 'na_attractions_description', true ) );
@@ -158,8 +164,13 @@ function na_attractions_default_column_content( $column, $post_id ) {
 			foreach( $terms as $term ) {
 				if ( $count != 0 )
 					echo ', ';
-					
-				echo $term->name;
+					// link to term edit page in admin
+					$edit_link = get_edit_term_link( $term->term_id, 'attractiontypes' );
+					if ( $edit_link ) {
+						echo '<a href="' . esc_url( $edit_link ) . '">' . esc_html( $term->name ) . '</a>';
+					} else {
+						echo esc_html( $term->name );
+					}
 				$count++;
 			}
 		}            

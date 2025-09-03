@@ -1,6 +1,8 @@
 ## 1.5
 
 -   Adding upload/export/import functionality
+-   Minor fixes in a number of other places
+-   Adding sample csv file
 
 ## 1.4
 

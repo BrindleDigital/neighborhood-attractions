@@ -7,8 +7,8 @@ add_action( 'admin_menu', 'na_add_attractions_settings_page' );
 function na_add_attractions_settings_page() {    
 	add_submenu_page(
 		'edit.php?post_type=attractions',   // The parent page's menu slug
-		'Attractions Settings',             // Page title
-		'Attractions Settings',             // Menu title
+		'Attractions settings',             // Page title
+		'Attractions settings',             // Menu title
 		'manage_options',                   // Capability required to access the page
 		'attractions-settings',             // Menu slug
 		'na_render_attractions_settings'     // Callback function to render the page
@@ -17,8 +17,8 @@ function na_add_attractions_settings_page() {
 	// Add an Imports page directly beneath the Settings page
 	add_submenu_page(
 		'edit.php?post_type=attractions',   // The parent page's menu slug
-		'Attraction Imports',              // Page title
-		'Attraction Imports',              // Menu title
+		'Attraction imports',              // Page title
+		'Attraction imports',              // Menu title
 		'manage_options',                   // Capability required to access the page
 		'attractions-imports',              // Menu slug
 		'na_render_attractions_imports'     // Callback function to render the imports page

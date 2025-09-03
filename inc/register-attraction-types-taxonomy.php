@@ -6,7 +6,7 @@ function na_register_tax() {
 		'attractiontypes',
 		'attractions',
 		array(
-			'label' 					=> __( 'Attraction Types' ),
+			'label' 					=> __( 'Attraction types' ),
 			'rewrite' 					=> array( 'slug' => 'attractiontypes' ),
 			'hierarchical' 				=> true,
 			'show_admin_column' 		=> true,
