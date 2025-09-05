@@ -88,8 +88,14 @@ function na_categories_markup() {
 		return;
 	}
 
+	$options = get_option( 'attractions_settings' );
+	$show_all_tab = isset( $options['show_all_tab'] ) ? (bool) $options['show_all_tab'] : true;
+
 	echo '<div class="na-attractions-categories">';
 		echo '<ul class="na-attractions-categories-wrap">';
+		if ( $show_all_tab ) {
+			echo '<li><button class="attraction-type-button" data-slug="all"><span class="attractiontype">All</span></button></li>';
+		}
 	foreach ( $visible_terms as $term ) {
 		printf( '<li><button class="attraction-type-button" data-slug="%s"><span class="attractiontype">%s</span></button></li>', esc_attr( $term->slug ), esc_html( $term->name ) );
 	}
@@ -122,6 +128,10 @@ function na_filter_attractions() {
 
 		// pass in the clicked category.
 		$attraction_type_slug = isset( $_POST['category'] ) ? sanitize_text_field( wp_unslash( $_POST['category'] ) ) : null;
+
+		if ( $attraction_type_slug === 'all' ) {
+			$attraction_type_slug = null;
+		}
 
 	} else {
 

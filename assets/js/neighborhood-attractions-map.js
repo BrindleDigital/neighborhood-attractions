@@ -99,8 +99,16 @@ jQuery(document).ready(function ($) {
 			var finalHeight = markerHeight ? parseInt(markerHeight, 10) : 40;
 
 			if (markerImage) {
-				// create marker with the URL first; we'll update icon once we load the image and compute aspect ratio
-				markerOpts.icon = markerImage;
+				// Set initial icon with default scaledSize to prevent native sizing
+				markerOpts.icon = {
+					url: markerImage,
+					scaledSize: new google.maps.Size(finalHeight, finalHeight), // Assume square initially
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(
+						Math.round(finalHeight / 2),
+						finalHeight
+					),
+				};
 			}
 			var marker = new google.maps.Marker(markerOpts);
 			bounds.extend(theposition);

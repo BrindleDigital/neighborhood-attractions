@@ -111,6 +111,7 @@ function na_register_attractions_settings() {
 	add_settings_field( 'google_api_key', 'Google Maps API key', 'render_google_api_key', 'na-admin-options', 'section_google_maps' );
 	add_settings_field( 'google_map_style', 'Google Maps style', 'render_google_map_style', 'na-admin-options', 'section_google_maps' );
 	add_settings_field( 'max_initial_attractions', 'Max attractions', 'render_max_initial_attractions', 'na-admin-options', 'section_google_maps' );
+	add_settings_field( 'show_all_tab', 'Show "All" tab', 'render_show_all_tab', 'na-admin-options', 'section_google_maps' );
 	add_settings_section( 'section_geolocation', 'Geocoding options', 'render_section_geolocation', 'na-admin-options' );
 	add_settings_field( 'positionstack_api_key', 'Positionstack API key', 'render_positionstack_api_key', 'na-admin-options', 'section_geolocation' );
 }
@@ -144,6 +145,16 @@ function render_max_initial_attractions() {
 	?>
 	<input type="number" min="0" style="width: 120px" name="attractions_settings[max_initial_attractions]" value="<?php echo esc_attr( $val ); ?>">
 	<p class="description">Show this many attractions in the grid before a "Load more" button appears. Leave blank or 0 to show all.</p>
+	<?php
+}
+
+function render_show_all_tab() {
+	$options = get_option( 'attractions_settings' );
+	$checked = isset( $options['show_all_tab'] ) ? $options['show_all_tab'] : true; // default to true
+	?>
+	<input type="hidden" name="attractions_settings[show_all_tab]" value="0">
+	<input type="checkbox" name="attractions_settings[show_all_tab]" value="1" <?php checked( $checked, 1 ); ?>>
+	<p class="description">Show the "All" tab in the attractions filter. If unchecked, the first category will be loaded by default.</p>
 	<?php
 }
 

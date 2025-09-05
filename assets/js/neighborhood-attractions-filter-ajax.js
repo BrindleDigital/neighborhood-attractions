@@ -82,7 +82,7 @@ jQuery(document).ready(function ($) {
 			dataType: 'html',
 			data: {
 				action: 'filter_attractions',
-				category: slug === 'all' ? undefined : slug,
+				category: slug,
 			},
 			success: function (res) {
 				// cache & render
@@ -110,6 +110,7 @@ jQuery(document).ready(function ($) {
 			dataType: 'html',
 			data: {
 				action: 'filter_attractions',
+				category: slug,
 			},
 			success: function (res) {
 				attractionsCache[slug] = res; // cache "all"
