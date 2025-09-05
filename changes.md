@@ -1,3 +1,7 @@
+## 1.6
+
+-   Adding ability to have an "All" tab (this is the new default when there are 2+ categories)
+
 ## 1.5
 
 -   Adding upload/export/import functionality
